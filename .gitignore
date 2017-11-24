@@ -12,6 +12,7 @@
 /.idea
 .project
 .classpath
+.sublime-project
 .c9/
 *.launch
 .settings/
