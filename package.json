@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
+    "angular-linkedin-sdk": "^0.1.7",
     "core-js": "^2.4.1",
     "ng2-pdf-viewer": "^3.0.1",
     "ngx-facebook": "^2.4.0",

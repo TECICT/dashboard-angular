@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { SlideshowModule } from './slideshow/slideshow.module';
 import { FacebookPostsModule } from './facebook/facebook.posts.module';
-
+import { LinkedinPostsModule } from './linkedin/linkedin.posts.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +13,8 @@ import { FacebookPostsModule } from './facebook/facebook.posts.module';
   imports: [
     BrowserModule,
     SlideshowModule,
-    FacebookPostsModule
+    FacebookPostsModule,
+    LinkedinPostsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FacebookService, InitParams, AuthResponse, LoginResponse } from 'ngx-facebook';
+import { FacebookService, InitParams, AuthResponse, LoginResponse, UIResponse, UIParams } from 'ngx-facebook';
 
 @Component({
   selector: 'facebook-posts',
@@ -7,7 +7,9 @@ import { FacebookService, InitParams, AuthResponse, LoginResponse } from 'ngx-fa
   styleUrls: ['./facebook.posts.component.css']
 })
 export class FacebookPostsComponent {
-  fresponse = 'blabla';
+  
+  postlink = '';
+
   constructor(private fb: FacebookService) {
 
     const params: InitParams = {
@@ -16,11 +18,10 @@ export class FacebookPostsComponent {
     };
 
     this.fb.init(params);
+    
   }
 
   ngOnInit() {
-    console.log(this.fresponse);
-    
   }
 
   login() {
@@ -35,8 +36,15 @@ export class FacebookPostsComponent {
   getPosts() {
     this.fb.api('https://www.facebook.com/tec4talent/posts')
     .then(res => {
-        this.fresponse = res;
-        console.log(this.fresponse);
+      var fresponse = res;
+      console.log(fresponse);
+      console.log(fresponse.data[0].id);
+      this.postlink = 'https://www.facebook.com/' + fresponse.data[1].id;
+      this.fb.api('https://www.facebook.com/' + fresponse.data[1].id + '/attachments')
+      .then(res => {
+        console.log(res);
+      })
+      .catch(e => console.error(e));
     })
     .catch(e => console.log(e));
   }
