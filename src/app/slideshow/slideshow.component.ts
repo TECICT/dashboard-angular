@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 export class SlideshowComponent {
   title = 'slideshow';
-  filename = "test.mp4";
+  filename = "Presentatie.mp4"; 
 }
