@@ -37,7 +37,7 @@ export class LinkedinPostsComponent {
 
   rawApiCall() {
     console.log('rawApiCall()');
-    let url ='/companies/18359028';
+    let url ='/companies/18359028/updates';
     this._linkedInService.raw(url)
       .asObservable()
       .subscribe({

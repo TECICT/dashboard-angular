@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { SlideshowModule } from './slideshow/slideshow.module';
 import { FacebookPostsModule } from './facebook/facebook.posts.module';
 import { LinkedinPostsModule } from './linkedin/linkedin.posts.module';
+import { MapsModule } from './maps/maps.module';
+import { WeatherModule } from './weather/weather.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { LinkedinPostsModule } from './linkedin/linkedin.posts.module';
     BrowserModule,
     SlideshowModule,
     FacebookPostsModule,
-    LinkedinPostsModule
+    LinkedinPostsModule,
+    MapsModule,
+    WeatherModule
   ],
   providers: [],
   bootstrap: [AppComponent]

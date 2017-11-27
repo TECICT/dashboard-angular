@@ -1,0 +1,6 @@
+<ng2-map zoom="10" center="schaarbeek, belgie">
+  <marker *ngFor="let pos of positions" 
+    (click)="showInfoWindow($event)"
+    [position]="pos"></marker>
+  <traffic-layer></traffic-layer>
+</ng2-map>
