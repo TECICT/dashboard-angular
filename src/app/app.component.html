@@ -1,4 +1,62 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <img alt="TEC ICT" src="https://www.tecict.be/images/tecICT-logo-RGB.png" height="25px">
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- Content -->
 <div class="container-fluid">
+
+  <!-- Volledige hoogte container opsplitsen -->
+  <div class="row toprow">
+
+    <!-- Linker kolom invoegen  -->
+    <div class="col-8"> 
+
+      <!-- Window voor slideshow -->
+      <div class="row row70 widget">
+        <slideshow></slideshow>
+      </div>
+
+      <!-- Rij voor Weer en agenda -->
+      <div class="row row30">
+      <!-- Weer widget -->
+        <div class="col-3 widget weer">
+          <weather></weather>
+        </div> 
+        <!-- Kalender widget -->
+        <div class="col-9 widget agenda">
+          <maps></maps>
+        </div>
+      </div>
+    </div>
+    <!-- Kolom voor Linkedin Verkeer -->
+    <div class="col-4">
+      <!-- Linkedin wiget -->
+      <div class="row row50"> 
+        <div class="col-12 widget linkedin">
+          <linkedin-posts></linkedin-posts>
+        </div>
+      </div>
+      <!-- Verkeer widget -->
+      <div class="row row50"> 
+        <div class="col-12 widget Verkeer">
+          <maps></maps>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- <div class="container-fluid">
   <div class="row row1">
     <div class="col-9 widget slideshow">
       <slideshow></slideshow>
@@ -23,5 +81,5 @@
     </div>
   </div>
   
-</div>
+</div> -->
 
