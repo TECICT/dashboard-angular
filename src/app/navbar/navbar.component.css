@@ -1,0 +1,12 @@
+.right {
+    float: right;
+}
+
+ul {
+    list-style: none;
+    float: right;
+}
+
+.nav-item {
+    float: right;
+}
