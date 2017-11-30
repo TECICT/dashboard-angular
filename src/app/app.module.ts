@@ -8,6 +8,7 @@ import { LinkedinPostsModule } from './linkedin/linkedin.posts.module';
 import { MapsModule } from './maps/maps.module';
 import { WeatherModule } from './weather/weather.module';
 import { NavbarModule } from './navbar/navbar.module';
+import { NewsModule } from './news/news.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NavbarModule } from './navbar/navbar.module';
     LinkedinPostsModule,
     MapsModule,
     WeatherModule,
-    NavbarModule
+    NavbarModule,
+    NewsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
