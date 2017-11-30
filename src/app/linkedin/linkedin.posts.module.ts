@@ -17,7 +17,9 @@ import { LinkedInSdkModule } from 'angular-linkedin-sdk';
   ],
   providers: [
     // Inject apiKey and, optionally, authorize to integrate with LinkedIN official API
-    { provide: 'apiKey', useValue: '86zag1txx9snbt' }
+    { provide: 'apiKey', useValue: '86zag1txx9snbt'},
+    { provide: 'authorize', useValue: 'false'},
+    { provide: 'isServer', useValue: 'false'}
   ],
   bootstrap: [LinkedinPostsComponent]
 })
