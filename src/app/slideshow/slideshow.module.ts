@@ -4,15 +4,12 @@ import { FormsModule } from '@angular/forms';
 
 import { SlideshowComponent } from './slideshow.component';
 
-import { PdfViewerModule } from 'ng2-pdf-viewer';
-
 @NgModule({
   declarations: [
     SlideshowComponent
   ],
   imports: [
     BrowserModule,
-    PdfViewerModule,
     FormsModule
   ],
   exports: [
