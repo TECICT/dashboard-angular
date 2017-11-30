@@ -47,6 +47,8 @@ export class NewsComponent implements OnInit {
             this.titles[i] = data.feed.entry[i].title[0]._;
             this.descriptions[i] = data.feed.entry[i].summary[0]._;
         }
+        this.titleNow = this.titles[0];
+        this.descriptionNow = this.descriptions[0];
     }
 
     onTimeOut() {
