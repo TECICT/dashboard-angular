@@ -1,1 +1,4 @@
-<button (click)="subscribeToLogin()" class="btn btn-primary">api call</button>
+<button (click)="subscribeToLogin()" class="btn btn-primary" [hidden]='!showlogin'>login</button>
+<button (click)="subscribeToLogout()" class="btn btn-primary" [hidden]='!showlogin'>logout</button>
+<h5>{{ this.postNow }}</h5>
+<img src="{{this.imageNow}}" alt="" width="200">
