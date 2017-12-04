@@ -1,0 +1,44 @@
+.postimage {
+    height: 100%;
+}
+
+.linkedin {
+    background: white;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+}
+
+.col-12 {
+    padding: 0;
+}
+
+.row60 {
+    max-height: 60%;
+
+}
+
+.row50 {
+    height: 50%;
+}
+
+.row40 {
+    max-height: 40%;
+}
+
+.flexrow {
+    flex: 0.99;
+}
+
+.vcenter {
+    display: flex;
+    align-items: center;
+}
+
+.myLink-url:hover {
+    background-color: black;
+}
+
+a:hover {
+    color: #F13B00;
+}

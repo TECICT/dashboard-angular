@@ -1,11 +1,25 @@
 import { Component } from '@angular/core';
 import { LinkedInService } from 'angular-linkedin-sdk';
 import { Observable } from 'rxjs';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'linkedin-posts',
   templateUrl: './linkedin.posts.component.html',
-  styleUrls: ['./linkedin.posts.component.css']
+  styleUrls: ['./linkedin.posts.component.css'],
+  animations: [
+      trigger('newLinkedinItem', [
+          state('middle', style({
+              transform: 'rotateY(90deg)'
+          })),
+          state('full' , style({
+              transform: 'rotateY(0deg)',
+          })),
+
+          transition('middle => full', animate('500ms ease-in')),
+          transition('full => middle', animate('500ms ease-out')),
+      ]),
+  ]
 })
 export class LinkedinPostsComponent {
   public isUserAuthenticated;
@@ -19,12 +33,13 @@ export class LinkedinPostsComponent {
   private counter = 0;
   totalData = 0;
 
+  public state = 'full';
+
   public constructor(private _linkedInService: LinkedInService) {
   
   }
 
   ngOnInit() {
-    console.log('init');
     this.subscribeToisInitialized();
 
     this.timer = Observable.timer(0, 10000);
@@ -34,15 +49,12 @@ export class LinkedinPostsComponent {
   getApiKeyFromSdkIN() {
     // Retrieve the API key used in the library through the SDK IN variable
     this.apiKey = this._linkedInService.getSdkIN().ENV.auth.api_key;
-    console.log(this.apiKey);
   }
 
   subscribeToLogin(){
-    console.log('subscribetologin');
     this._linkedInService.login().subscribe({
       next: (state) => {
         // state will always return true when login completed
-        console.log('hello');
       },
       complete: () => {
         // Completed
@@ -59,14 +71,13 @@ export class LinkedinPostsComponent {
         // does not emit a value 
       },
       complete: () => {
-        console.log('logged out');
+        console.log('linkedin logged out');
         // Completed
       }
     });
   }
 
   subscribeToisInitialized(){
-    console.log('subscribeToisInitialized');
     this._linkedInService.isInitialized$.subscribe({
       next: (state) => {
         // state will always return true when API finishes loading
@@ -116,12 +127,23 @@ export class LinkedinPostsComponent {
   }
 
   onTimeOut() {
-    if (this.counter >= this.totalData) {
-      this.counter = 0;
+    this.toggleState();
+  }
+
+  toggleState() {
+      console.log('togglestate');
+      this.state = this.state === 'middle' ? 'full' : 'middle';
+  }
+
+  setNewItem() {
+    if (this.state == 'middle') {
+      if (this.counter >= this.totalData) {
+        this.counter = 0;
+      }
+      this.postNow = this.posts[this.counter];
+      this.imageNow = this.postImages[this.counter];
+      this.counter++;
+      this.toggleState();
     }
-    this.postNow = this.posts[this.counter];
-    this.imageNow = this.postImages[this.counter];
-    console.log(this.imageNow);
-    this.counter++;
   }
 }

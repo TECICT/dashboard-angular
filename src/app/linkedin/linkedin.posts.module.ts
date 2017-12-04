@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { LinkedinPostsComponent } from './linkedin.posts.component';
 import { LinkedInSdkModule } from 'angular-linkedin-sdk';
+import { LinkyModule } from 'angular-linky';
 
 @NgModule({
   declarations: [
@@ -10,7 +12,9 @@ import { LinkedInSdkModule } from 'angular-linkedin-sdk';
   ],
   imports: [
     BrowserModule,
-    LinkedInSdkModule
+    LinkedInSdkModule,
+    LinkyModule,
+    BrowserAnimationsModule
   ],
   exports: [
     LinkedinPostsComponent
