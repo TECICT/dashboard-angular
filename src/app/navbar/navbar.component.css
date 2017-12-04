@@ -10,3 +10,7 @@ ul {
 .nav-item {
     float: right;
 }
+
+.row {
+    width: 100%;
+}

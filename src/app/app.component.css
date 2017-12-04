@@ -45,6 +45,7 @@
 
 .widget {
     border-style: solid;
+    border-color: #003443;
     text-align: center;
     padding: 0;
 }
