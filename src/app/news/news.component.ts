@@ -2,11 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { parseString } from 'xml2js';
 import { Observable } from 'rxjs';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
     selector: 'news',
     templateUrl: './news.component.html',
-    styleUrls: ['./news.component.css']
+    styleUrls: ['./news.component.css'],
+    animations: [
+        trigger('newNewsItem', [
+            state('middle', style({
+                transform: 'rotateX(90deg)'
+            })),
+            state('full' , style({
+                transform: 'rotateX(0deg)',
+            })),
+
+            transition('middle => full', animate('500ms ease-in')),
+            transition('full => middle', animate('500ms ease-out')),
+        ]),
+    ]
 })
 export class NewsComponent implements OnInit {
     data: any;
@@ -17,11 +31,13 @@ export class NewsComponent implements OnInit {
     private timer;
     private counter = 0;
 
+    public state = 'full';
+
     constructor(private http:Http) {    
     }
 
     ngOnInit() {
-        this.timer = Observable.timer(0, 10000);
+        this.timer = Observable.timer(0, 14000);
         this.timer.subscribe((t) => this.onTimeOut());
 
         var headers = new Headers();
@@ -36,6 +52,7 @@ export class NewsComponent implements OnInit {
             })
             .subscribe(res => {
                 this.data = res;
+                console.log(this.data);
                 this.parseData(this.data);
             });
 
@@ -52,12 +69,24 @@ export class NewsComponent implements OnInit {
     }
 
     onTimeOut() {
-        if (this.counter >= 5) {
-            this.counter = 0;
-        }
-        this.titleNow = this.titles[this.counter];
-        this.descriptionNow = this.descriptions[this.counter];
-        this.counter++;
+        this.toggleState();
     }
 
+    toggleState() {
+        console.log('togglestate');
+        this.state = this.state === 'middle' ? 'full' : 'middle';
+    }
+
+    setNewItem() {
+        if (this.state == 'middle') {
+            if (this.counter >= 5) {
+                this.counter = 0;
+            }
+            this.titleNow = this.titles[this.counter];
+            this.descriptionNow = this.descriptions[this.counter];
+            this.counter++;
+            this.toggleState();
+        }
+
+    }
 }
