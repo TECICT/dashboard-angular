@@ -1,22 +1,16 @@
-    <div class="container-fluid">
-        <div class="row">
-            <div class="navbar-header">
-                <div class=" navbar-brand col-10">
-                    <a href="#">
-                      <img alt="TEC ICT" src="https://www.tecict.be/images/tecICT-logo-RGB.png" height="25px">
-                    </a>
-                </div>
-            </div>
-            <div class="col-2 navbar-nav navbar-right">
-                <ul>
-                    <li class="nav-item">
-                        <span>{{time | date:'dd/MM/yyyy HH:mm:ss' }}</span>
-                    </li>
-                </ul>
-            </div>
+<div class="container-fluid">
+    <div class="left-col">
+        <div class="brand">
+            <a href="#">
+              <img alt="TEC ICT" src="https://www.tecict.be/images/tecICT-logo-RGB.png" height="25px">
+            </a>
         </div>
-        
-        
     </div>
+    <div class="right-col">
+        <span class="time">{{time | date:'dd/MM/yyyy HH:mm:ss' }}</span>
+    </div>
+    
+    
+</div>
 
     
