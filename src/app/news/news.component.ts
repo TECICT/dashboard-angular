@@ -28,7 +28,8 @@ export class NewsComponent implements OnInit {
     titleNow = '';
     descriptionNow = '';
     descriptions: string[] = [];
-    private timer;
+    private animationTimer;
+    private newsTimer;
     private counter = 0;
 
     public state = 'full';
@@ -37,39 +38,39 @@ export class NewsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.timer = Observable.timer(0, 14000);
-        this.timer.subscribe((t) => this.onTimeOut());
+        this.animationTimer = Observable.timer(0, 14000);
+        this.animationTimer.subscribe((t) => this.toggleState());
 
+        this.newsTimer = Observable.timer(0, 900000);
+        this.newsTimer.subscribe((t) => this.getNews());
+    }
+
+    getNews() {
         var headers = new Headers();
         headers.append('Accept', 'application/xml');
-        this.http.get('https://www.vrt.be/vrtnws/nl.rss.headlines.xml', {headers: headers})
-            .map(res => {
-                var myRes
-                parseString(res.text(), function (err, result) {
-                    myRes = result;
-                });
-                return myRes;
-            })
-            .subscribe(res => {
-                this.data = res;
-                console.log(this.data);
-                this.parseData(this.data);
+        this.http
+        .get('https://www.vrt.be/vrtnws/nl.rss.headlines.xml', {headers: headers})
+        .map(res => {
+            var myRes
+            parseString(res.text(), function (err, result) {
+                myRes = result;
             });
-
+            return myRes;
+        })
+        .subscribe(res => {
+            this.data = res;
+            this.parseData(this.data);
+        });
     }
 
     parseData(data) {
         var i;
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < 10; i++) {
             this.titles[i] = data.feed.entry[i].title[0]._;
             this.descriptions[i] = data.feed.entry[i].summary[0]._;
         }
         this.titleNow = this.titles[0];
         this.descriptionNow = this.descriptions[0];
-    }
-
-    onTimeOut() {
-        this.toggleState();
     }
 
     toggleState() {
@@ -78,7 +79,7 @@ export class NewsComponent implements OnInit {
 
     setNewItem() {
         if (this.state == 'middle') {
-            if (this.counter >= 5) {
+            if (this.counter >= 10) {
                 this.counter = 0;
             }
             this.titleNow = this.titles[this.counter];

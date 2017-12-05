@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from './weather.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'weather',
@@ -9,6 +10,7 @@ import { WeatherService } from './weather.service';
 export class WeatherComponent implements OnInit {
   weather = {'name': '', 'main': {'temp': 0}};
   icon = '';
+  private weatherTimer;
 
   constructor(private weatherService: WeatherService) {
 
@@ -16,6 +18,12 @@ export class WeatherComponent implements OnInit {
 
   ngOnInit() {
     this.weather['name'] = '';
+
+    this.weatherTimer = Observable.timer(0, 600000);
+    this.weatherTimer.subscribe((t) => this.getWeather());
+  }
+
+  getWeather() {
     this.weatherService.getWeatheritemsbyCity('Brussels')
     .subscribe(
       data => {
@@ -26,7 +34,8 @@ export class WeatherComponent implements OnInit {
       },
       error => {
         console.log('error getting the weather');
-      });
+      }
+    );
   }
 
   translateIcon(code) {
