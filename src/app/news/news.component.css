@@ -5,4 +5,9 @@
 
 h5 {
     color: #F13B00;
+    padding-right: 25px;
+}
+
+.description {
+    padding: 0 20px;
 }
