@@ -11,10 +11,10 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     animations: [
         trigger('newNewsItem', [
             state('middle', style({
-                transform: 'rotateX(90deg)'
+                opacity: 0
             })),
             state('full' , style({
-                transform: 'rotateX(0deg)',
+                opacity: 1
             })),
 
             transition('middle => full', animate('500ms ease-in')),

@@ -10,10 +10,10 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   animations: [
       trigger('newLinkedinItem', [
           state('middle', style({
-              transform: 'rotateY(90deg)'
+              opacity: 0
           })),
           state('full' , style({
-              transform: 'rotateY(0deg)',
+              opacity: 1
           })),
 
           transition('middle => full', animate('500ms ease-in')),
