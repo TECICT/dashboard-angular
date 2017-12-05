@@ -41,7 +41,7 @@ export class NewsComponent implements OnInit {
         this.animationTimer = Observable.timer(0, 14000);
         this.animationTimer.subscribe((t) => this.toggleState());
 
-        this.newsTimer = Observable.timer(0, 900000);
+        this.newsTimer = Observable.timer(0, 3600000);
         this.newsTimer.subscribe((t) => this.getNews());
     }
 

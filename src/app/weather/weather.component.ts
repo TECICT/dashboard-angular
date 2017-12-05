@@ -19,7 +19,7 @@ export class WeatherComponent implements OnInit {
   ngOnInit() {
     this.weather['name'] = '';
 
-    this.weatherTimer = Observable.timer(0, 600000);
+    this.weatherTimer = Observable.timer(0, 3600000);
     this.weatherTimer.subscribe((t) => this.getWeather());
   }
 
@@ -30,7 +30,6 @@ export class WeatherComponent implements OnInit {
         this.weather = data;
         this.icon = this.translateIcon(data.weather[0].id);
         console.log(this.weather);
-        console.log(this.icon);
       },
       error => {
         console.log('error getting the weather');

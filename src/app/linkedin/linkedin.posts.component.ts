@@ -29,7 +29,8 @@ export class LinkedinPostsComponent {
   postNow: string = '';
   imageNow: string = '';
   showlogin: Boolean = true;
-  private timer;
+  private animationTimer;
+  private linkedinTimer;
   private counter = 0;
   totalData = 0;
 
@@ -42,8 +43,10 @@ export class LinkedinPostsComponent {
   ngOnInit() {
     this.subscribeToisInitialized();
 
-    this.timer = Observable.timer(0, 10000);
-    this.timer.subscribe((t) => this.onTimeOut());
+    this.linkedinTimer = Observable.timer(3600000, 3600000)
+    this.linkedinTimer.subscribe((t) => this.rawApiCall());
+    this.animationTimer = Observable.timer(0, 10000);
+    this.animationTimer.subscribe((t) => this.toggleState());
   }
 
   getApiKeyFromSdkIN() {
@@ -124,10 +127,6 @@ export class LinkedinPostsComponent {
     }
     this.postNow = this.posts[0];
     this.imageNow = this.postImages[0];
-  }
-
-  onTimeOut() {
-    this.toggleState();
   }
 
   toggleState() {
