@@ -1,16 +1,15 @@
 <div class="news" [@newNewsItem]="state" (@newNewsItem.done)="setNewItem()">
-    <div class="row">
+    <div class="row flexrow">
         <div class="col-3">
-            <img src="https://pbs.twimg.com/profile_images/899605076695764992/rAr1pvdZ_400x400.jpg" alt="" height="100px">
+            <img src="https://pbs.twimg.com/profile_images/899605076695764992/rAr1pvdZ_400x400.jpg" alt="">
         </div>
-        <div class="col-9">
+        <div class="col-9 vcenter">
             <span>
-                <br>
                 <h5><i>"{{this.titleNow}}"</i></h5>
             </span>
         </div>
     </div>
-    <div class="description">
+    <div class="description flexrow">
         {{this.descriptionNow}}
     </div>
 </div>

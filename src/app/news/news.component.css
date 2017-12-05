@@ -1,6 +1,8 @@
 .news {
     background: white;
     height: 100%;
+    display: flex;
+    flex-flow: column;
 }
 
 h5 {
@@ -10,4 +12,18 @@ h5 {
 
 .description {
     padding: 0 20px;
+}
+
+.flexrow {
+    flex: 0.98;
+}
+
+img {
+    height: 100%;
+}
+
+.vcenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
