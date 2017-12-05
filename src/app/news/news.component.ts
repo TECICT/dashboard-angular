@@ -73,7 +73,6 @@ export class NewsComponent implements OnInit {
     }
 
     toggleState() {
-        console.log('togglestate');
         this.state = this.state === 'middle' ? 'full' : 'middle';
     }
 
