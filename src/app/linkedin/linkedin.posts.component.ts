@@ -131,7 +131,6 @@ export class LinkedinPostsComponent {
   }
 
   toggleState() {
-      console.log('togglestate');
       this.state = this.state === 'middle' ? 'full' : 'middle';
   }
 
