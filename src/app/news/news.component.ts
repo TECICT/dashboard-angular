@@ -17,7 +17,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
                 opacity: 1
             })),
 
-            transition('middle => full', animate('500ms ease-in')),
+            transition('middle => full', animate('500ms 500ms ease-in')),
             transition('full => middle', animate('500ms ease-out')),
         ]),
     ]
