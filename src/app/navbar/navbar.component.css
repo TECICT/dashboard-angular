@@ -34,11 +34,19 @@ ul {
 }
 
 .time {
-    color: #f13b00;
     display: flex;
     align-items: center;
     vertical-align: middle;
     height: 100%;
+    font-size: 25px;
+}
+
+.orange {
+    color: #f13b00;
+}
+
+.blue {
+    color: #003443;
 }
 
 .brand {

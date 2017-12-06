@@ -3,6 +3,11 @@
     max-width: 100%;
 }
 
+.left-align {
+    text-align: justify;
+    padding-right: 20px;
+}
+
 .linkedin {
     background: white;
     height: 100%;
@@ -33,7 +38,9 @@
 
 .vcenter {
     display: flex;
+    justify-content: center;
     align-items: center;
+    padding: 0;
 }
 
 .myLink-url:hover {
@@ -42,4 +49,9 @@
 
 a:hover {
     color: #F13B00;
+}
+
+.imagecol {
+    padding-right: 20px;
+    padding-left: 0;
 }

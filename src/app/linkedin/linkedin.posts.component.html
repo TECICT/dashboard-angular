@@ -1,16 +1,19 @@
 <div class="linkedin container-fluid" [@newLinkedinItem]="state" (@newLinkedinItem.done)="setNewItem()">
     <div class="row">
-        <div class="col-3 vcenter">
+        <div class="col-2 vcenter">
             <img src="https://lh3.googleusercontent.com/-cTMuJhKkzAc/UfGZGGGggbI/AAAAAAAAak0/c1zFHbniZOcAMzGpR98t8wsHtHVE7beQACJoC/w722-h722/LinkedIn-Google-Plus-Profile-Pic-01.png" alt="" height="100px">
         </div>
-        <div class="col-9 vcenter">
-            <span>
+        <div class="col-10 vcenter">
+            <span class="left-align">
                 <span [innerHTML]="this.postNow | linky:{ className: 'myLink' }"></span>
             </span>
         </div>
     </div>
     <div class="row flexrow">
-        <div class="col-12">
+        <div class="col-2">
+            
+        </div>
+        <div class="col-10 imagecol">
             <button (click)="subscribeToLogin()" class="btn btn-primary" [hidden]='!showlogin'>login</button>
             <button (click)="subscribeToLogout()" class="btn btn-primary" [hidden]='!showlogin'>logout</button>
             <img class="postimage" src="{{this.imageNow}}" alt="">
