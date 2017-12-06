@@ -1,0 +1,52 @@
+.navbar {
+    height: 6%;
+    background: white;
+    padding: 0;
+}
+
+.container-fluid {
+    height: 94%;
+}
+
+.toprow {
+    height: 100%;
+}
+
+.row30 {
+    height: 30%;
+    padding: 0;
+}
+
+.row40 {
+    height: 40%;
+    padding: 0;
+}
+
+.row50 {
+    height: 50%;
+    padding: 0;
+}
+
+.row60 {
+    height: 60%;
+    padding: 0;
+}
+
+.row70 {
+    height: 70%;
+    padding: 0;
+}
+
+.row100 {
+    height: 100%;
+    padding: 0;
+}
+
+
+
+.widget {
+    border-style: solid;
+    border-color: #003443;
+    text-align: center;
+    padding: 0;
+}
