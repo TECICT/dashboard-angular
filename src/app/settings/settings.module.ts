@@ -1,8 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SettingsComponent } from './settings.component';
+
+import { FileSelectDirective } from 'ng2-file-upload';
+
+import { SettingsService, ApiService } from '../services';
 
 const appRoutes: ModuleWithProviders = RouterModule.forChild([
   {
@@ -13,13 +18,19 @@ const appRoutes: ModuleWithProviders = RouterModule.forChild([
 
 @NgModule({
   declarations: [
-    SettingsComponent
+    SettingsComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,
-    appRoutes
+    appRoutes,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    SettingsService,
+    ApiService
+  ],
   bootstrap: [SettingsComponent]
 })
 export class SettingsModule { }
