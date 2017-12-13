@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { WeatherComponent } from './weather.component';
-import { WeatherService } from './weather.service';
+import { WeatherService } from '../services';
 
 
 @NgModule({

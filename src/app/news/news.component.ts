@@ -4,6 +4,8 @@ import { parseString } from 'xml2js';
 import { Observable } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
+import { NewsService } from '../services';
+
 @Component({
     selector: 'news',
     templateUrl: './news.component.html',
@@ -34,7 +36,7 @@ export class NewsComponent implements OnInit {
 
     public state = 'full';
 
-    constructor(private http:Http) {    
+    constructor(private newsService: NewsService) {    
     }
 
     ngOnInit() {
@@ -46,21 +48,17 @@ export class NewsComponent implements OnInit {
     }
 
     getNews() {
-        var headers = new Headers();
-        headers.append('Accept', 'application/xml');
-        this.http
-        .get('https://www.vrt.be/vrtnws/nl.rss.headlines.xml', {headers: headers})
-        .map(res => {
-            var myRes
-            parseString(res.text(), function (err, result) {
-                myRes = result;
-            });
-            return myRes;
-        })
-        .subscribe(res => {
-            this.data = res;
-            this.parseData(this.data);
-        });
+
+        this.newsService.get()
+        .subscribe(
+            data => {
+              this.data = data;
+              this.parseData(this.data);
+            },
+            error => {
+              console.log('error getting the news');
+            }
+        );
     }
 
     parseData(data) {

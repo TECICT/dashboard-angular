@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { NewsComponent } from './news.component';
+import { NewsService } from '../services';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { NewsComponent } from './news.component';
     NewsComponent
   ],
   providers: [
-    
+    NewsService
   ],
   bootstrap: [NewsComponent]
 })
