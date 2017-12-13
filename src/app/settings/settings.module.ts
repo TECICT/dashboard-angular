@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SettingsComponent } from './settings.component';
 
-import { FileSelectDirective } from 'ng2-file-upload';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { SettingsService, ApiService } from '../services';
 
@@ -18,14 +18,14 @@ const appRoutes: ModuleWithProviders = RouterModule.forChild([
 
 @NgModule({
   declarations: [
-    SettingsComponent,
-    FileSelectDirective
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
     appRoutes,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FileUploadModule
   ],
   providers: [
     SettingsService,
