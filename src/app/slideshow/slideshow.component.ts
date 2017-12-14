@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
+import { environment } from '../../environments/environment';
 import { FileUploader } from 'ng2-file-upload';
 import { Observable } from 'rxjs';
 
@@ -13,7 +14,7 @@ export class SlideshowComponent implements OnInit{
   // private slideshowTimer;
 
   ngOnInit() {
-      this.src = 'http://localhost:3000/video';
+      this.src = environment.api_url + '/video';
       // this.slideshowTimer = Observable.timer(0, 60000);
       // this.slideshowTimer.subscribe((t) => this.loadVideo());
   }

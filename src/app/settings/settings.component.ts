@@ -2,6 +2,7 @@ import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { FileUploader } from 'ng2-file-upload';
+import { environment } from '../../environments/environment';
 
 import { SettingsService } from '../services';
 import { Settings } from '../models';
@@ -13,7 +14,7 @@ import { Settings } from '../models';
 })
 export class SettingsComponent implements AfterViewInit, OnInit{
     public uploader:FileUploader = new FileUploader({
-      url:'http://localhost:3000/video/upload',
+      url: environment.api_url + '/video/upload',
       allowedMimeType: ['video/mp4']
     });
     settings: Settings = new Settings();
