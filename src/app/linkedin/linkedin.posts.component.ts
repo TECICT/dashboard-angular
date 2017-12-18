@@ -118,12 +118,18 @@ export class LinkedinPostsComponent {
     }
     var i;
     for (i = 0; i < this.totalData; i++) {
-        this.posts[i] = data.values[i].updateContent.companyStatusUpdate.share.comment
-        if ('content' in data.values[i].updateContent.companyStatusUpdate.share) {
-          this.postImages[i] = data.values[i].updateContent.companyStatusUpdate.share.content.submittedImageUrl
-        } else {
-          this.postImages[i] = '';
+        if ('companyStatusUpdate' in data.values[i].updateContent) {
+            this.posts[i] = data.values[i].updateContent.companyStatusUpdate.share.comment
+            if ('content' in data.values[i].updateContent.companyStatusUpdate.share) {
+              this.postImages[i] = data.values[i].updateContent.companyStatusUpdate.share.content.submittedImageUrl
+            } else {
+              this.postImages[i] = '';
+            }
+        } else if ('companyJobUpdate' in data.values[i].updateContent) {
+            this.posts[i] = data.values[i].updateContent.companyJobUpdate.job.description;
+            this.postImages[i] = '';
         }
+        
     }
     this.postNow = this.posts[0];
     this.imageNow = this.postImages[0];
