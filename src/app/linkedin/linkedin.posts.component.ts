@@ -29,10 +29,13 @@ export class LinkedinPostsComponent {
   postNow: string = '';
   imageNow: string = '';
   showlogin: Boolean = true;
+  jobDescriptions: string[] = [];
   private animationTimer;
   private linkedinTimer;
   private counter = 0;
   totalData = 0;
+  showImage: boolean = true;
+  jobDescription = '';
 
   public state = 'full';
 
@@ -119,20 +122,29 @@ export class LinkedinPostsComponent {
     var i;
     for (i = 0; i < this.totalData; i++) {
         if ('companyStatusUpdate' in data.values[i].updateContent) {
-            this.posts[i] = data.values[i].updateContent.companyStatusUpdate.share.comment
+            this.posts[i] = data.values[i].updateContent.companyStatusUpdate.share.comment;
+            this.jobDescriptions[i] = '';
             if ('content' in data.values[i].updateContent.companyStatusUpdate.share) {
               this.postImages[i] = data.values[i].updateContent.companyStatusUpdate.share.content.submittedImageUrl
             } else {
               this.postImages[i] = '';
             }
         } else if ('companyJobUpdate' in data.values[i].updateContent) {
-            this.posts[i] = data.values[i].updateContent.companyJobUpdate.job.description;
+            this.posts[i] = 'Vacature: ' + data.values[i].updateContent.companyJobUpdate.job.position.title;
             this.postImages[i] = '';
+            this.jobDescriptions[i] = data.values[i].updateContent.companyJobUpdate.job.description;
+            console.log(this.jobDescriptions[i].length);
+            console.log(this.jobDescriptions[i]);
         }
         
     }
     this.postNow = this.posts[0];
     this.imageNow = this.postImages[0];
+    this.jobDescription = this.jobDescriptions[0];
+
+    if (this.jobDescription == '') {
+      this.showImage = true;
+    }
   }
 
   toggleState() {
@@ -145,6 +157,12 @@ export class LinkedinPostsComponent {
         this.counter = 0;
       }
       this.postNow = this.posts[this.counter];
+      if (this.jobDescriptions[this.counter] == '') {
+        this.showImage = true;
+      } else {
+        this.showImage = false;
+      }
+      this.jobDescription = this.jobDescriptions[this.counter];
       this.imageNow = this.postImages[this.counter];
       this.counter++;
       this.toggleState();
