@@ -4,6 +4,8 @@ import { environment } from '../../environments/environment';
 import { FileUploader } from 'ng2-file-upload';
 import { Observable } from 'rxjs';
 
+import { SettingsService } from '../services';
+
 @Component({
   selector: 'slideshow',
   templateUrl: './slideshow.component.html',
@@ -11,16 +13,28 @@ import { Observable } from 'rxjs';
 })
 export class SlideshowComponent implements OnInit{
   src: String = "";
-  // private slideshowTimer;
+  private slideshowTimer;
+
+  constructor(private settingsService: SettingsService) {}
 
   ngOnInit() {
-      this.src = environment.api_url + '/video';
-      // this.slideshowTimer = Observable.timer(0, 60000);
-      // this.slideshowTimer.subscribe((t) => this.loadVideo());
+      // this.src = environment.api_url + '/video';
+      
+      this.slideshowTimer = Observable.timer(0, 10000);
+      this.slideshowTimer.subscribe((t) => this.changeSource());
   }
 
-  ngAfterViewInit() {
-      this.loadVideo();
+  changeSource() {
+    console.log('test changesource');
+      this.settingsService.get()
+      .subscribe(settings => {
+        if (this.src !== environment.api_url + '/video/' + settings.video.split('/').pop()) {
+          console.log('video change');
+          console.log(environment.api_url + '/video/' + settings.video.split('/').pop());
+          this.src = environment.api_url + '/video/' + settings.video.split('/').pop();
+          this.loadVideo();
+        }
+      });
   }
 
   loadVideo() {

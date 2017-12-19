@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Ng2MapComponent } from 'ng2-map';
+import { Observable } from 'rxjs';
 
 import { SettingsService } from '../services';
 
@@ -11,12 +12,19 @@ import { SettingsService } from '../services';
 })
 export class MapsComponent implements OnInit{ 
   location: string = 'Grimbergen, Brussel';
+  private mapsTimer;
 
   constructor(private settingsService: SettingsService) {}
 
   ngOnInit() {
+    this.mapsTimer = Observable.timer(0, 60000);
+    this.mapsTimer.subscribe((t) => this.getLocation());
+  }
+
+  getLocation() {
     this.settingsService.get()
     .subscribe(settings => {
+      console.log('changing location');
       this.location = settings.location_maps;
     });
   }
