@@ -19,7 +19,7 @@ export class WeatherComponent implements OnInit {
   ngOnInit() {
     this.weather['name'] = '';
 
-    this.weatherTimer = Observable.timer(0, 3600000);
+    this.weatherTimer = Observable.timer(0, 120000);
     this.weatherTimer.subscribe((t) => this.getWeather());
   }
 
