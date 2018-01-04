@@ -121,9 +121,17 @@ export class LinkedinPostsComponent {
         if ('companyStatusUpdate' in data.values[i].updateContent) {
             this.posts[i] = data.values[i].updateContent.companyStatusUpdate.share.comment;
             if ('content' in data.values[i].updateContent.companyStatusUpdate.share) {
-              this.postImages[i] = data.values[i].updateContent.companyStatusUpdate.share.content.submittedImageUrl
+              this.postImages[i] = data.values[i].updateContent.companyStatusUpdate.share.content.submittedImageUrl;
+              if (this.posts[i].length > 140) {
+                var substr1 = this.posts[i].substring(0,140);
+                var substr2 = this.posts[i].substring(141);
+                this.posts[i] = substr1 + substr2.substring(0, substr2.indexOf(' ')) + "... Read more at linkedin.com/company/44163";
+              }
             } else {
               this.postImages[i] = '';
+              if (this.posts[i].length > 800) {
+                this.posts[i] = this.posts[i].substring(0,900) + "...";
+              }
             }
         } else if ('companyJobUpdate' in data.values[i].updateContent) {
             this.posts[i] = 'Vacature: ' + data.values[i].updateContent.companyJobUpdate.job.position.title;

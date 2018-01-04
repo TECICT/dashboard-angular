@@ -1,9 +1,9 @@
 <div class="linkedin container-fluid" [@newLinkedinItem]="state" (@newLinkedinItem.done)="setNewItem()">
     <div class="row">
-        <div class="col-2 vcenter">
+        <div class="col-2 picture">
             <img src="https://lh3.googleusercontent.com/-cTMuJhKkzAc/UfGZGGGggbI/AAAAAAAAak0/c1zFHbniZOcAMzGpR98t8wsHtHVE7beQACJoC/w722-h722/LinkedIn-Google-Plus-Profile-Pic-01.png" alt="" height="100px">
         </div>
-        <div class="col-10 vcenter">
+        <div class="col-10 text">
             <span class="left-align">
                 <b><span class="title" [innerHTML]="this.postNow | linky:{ className: 'myLink' }"></span></b>
             </span>
