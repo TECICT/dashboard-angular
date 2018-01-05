@@ -4,8 +4,10 @@ import { RouterModule } from '@angular/router';
 
 import { DashboardModule } from './dashboard/dashboard.module';
 import { SettingsModule } from './settings/settings.module';
+import { AuthModule } from './auth/auth.module';
 
 import { AppComponent } from './app.component';
+import { UserService, JwtService } from './services';
 
 const appRoutes: ModuleWithProviders = RouterModule.forRoot([], { useHash: true });
 
@@ -17,9 +19,13 @@ const appRoutes: ModuleWithProviders = RouterModule.forRoot([], { useHash: true 
     BrowserModule,
     appRoutes,
     DashboardModule,
-    SettingsModule
+    SettingsModule,
+    AuthModule
   ],
-  providers: [],
+  providers: [
+    UserService,
+    JwtService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

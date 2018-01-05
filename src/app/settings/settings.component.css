@@ -33,6 +33,17 @@ a:hover {
     background-color: #f13b00;
 }
 
+.tecbtnblue {
+    background-color: #003443;
+    color: white;
+    cursor: pointer;
+}
+
+.tecbtnblue:hover {
+    border-style: solid;
+    border-color: white;
+}
+
 .tecbtn {
     background-color: #f13b00;
     color: white;

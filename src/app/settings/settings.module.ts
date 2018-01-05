@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ErrorModule } from '../errors/error.module';
 
 import { SettingsComponent } from './settings.component';
 
@@ -25,7 +26,8 @@ const appRoutes: ModuleWithProviders = RouterModule.forChild([
     appRoutes,
     FormsModule,
     ReactiveFormsModule,
-    FileUploadModule
+    FileUploadModule,
+    ErrorModule
   ],
   providers: [
     SettingsService,

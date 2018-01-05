@@ -1,10 +1,13 @@
 import { Component, AfterViewInit, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Rx';
+
 import { FormGroup } from '@angular/forms';
 
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from '../../environments/environment';
 
-import { SettingsService } from '../services';
+import { SettingsService, UserService } from '../services';
 import { Settings } from '../models';
 
 @Component({
@@ -23,6 +26,8 @@ export class SettingsComponent implements AfterViewInit, OnInit{
 
     public constructor(
       private settingsService: SettingsService,
+      private router: Router,
+      private userService: UserService,
     ) {}
 
     ngAfterViewInit() {
@@ -43,7 +48,11 @@ export class SettingsComponent implements AfterViewInit, OnInit{
           this.settings = settings;
           console.log('this.settings');
           console.log(this.settings);
-        });
+        },
+        err => {
+          this.router.navigateByUrl('/')
+        })
+        ;
     }
 
     clearButton() {
@@ -60,5 +69,10 @@ export class SettingsComponent implements AfterViewInit, OnInit{
 
     enableSave() {
       this.noChanges = false;
+    }
+
+    logout() {
+      this.userService.purgeAuth();
+      this.router.navigateByUrl('/');
     }
 }

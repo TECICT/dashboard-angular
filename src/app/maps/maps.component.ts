@@ -24,7 +24,6 @@ export class MapsComponent implements OnInit{
   getLocation() {
     this.settingsService.get()
     .subscribe(settings => {
-      console.log('changing location');
       this.location = settings.location_maps;
     });
   }

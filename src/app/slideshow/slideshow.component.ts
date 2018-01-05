@@ -25,7 +25,6 @@ export class SlideshowComponent implements OnInit{
   }
 
   changeSource() {
-    console.log('test changesource');
       this.settingsService.get()
       .subscribe(settings => {
         if (this.src !== environment.api_url + '/video/' + settings.video.split('/').pop()) {

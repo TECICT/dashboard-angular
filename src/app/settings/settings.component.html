@@ -2,7 +2,7 @@
     <div class="row">
         <h1><a routerLink="/">settings</a></h1>
     </div>
-    <div class="row">
+    <div *showAuthed="true" class="row">
         <div class="col-12">
             <h3>Slideshow</h3>
         </div>
@@ -55,7 +55,7 @@
             </table>
         </div>
     </div>
-    <div class="row">
+    <div *showAuthed="true" class="row">
         <div class="col-md-12">
             <br>
             <h3>other settings</h3>
@@ -73,7 +73,18 @@
                 <button type="submit" class="btn tecbtn" (click)="submitForm()" [disabled]="noChanges">Save</button>
             </form>
             <br>
+            <button class="btn tecbtnblue"
+                (click)="logout()">
+                Logout.
+            </button>
+            <br>
         </div>
+    </div>
+    <div *showAuthed="false" class="row">
+        <div class="col-md-12">
+            <h3>You can not change the settings when you are not logged in... Please click <a routerLink="/login">here</a> to login or go back to the <a routerLink="/">home page</a></h3>
+        </div>
+        
     </div>
 </div>
 
