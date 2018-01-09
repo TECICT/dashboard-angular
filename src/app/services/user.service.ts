@@ -19,6 +19,8 @@ export class UserService {
   private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
   public isAuthenticated = this.isAuthenticatedSubject.asObservable();
 
+  private busy = false;
+
   constructor (
     private apiService: ApiService,
     private http: Http,
@@ -29,10 +31,14 @@ export class UserService {
   // This runs once on application startup.
   populate() {
     // If JWT detected, attempt to get & store user's info
+    this.busy = true;
     if (this.jwtService.getToken()) {
       this.apiService.get('/user')
       .subscribe(
-        data => this.setAuth(data.user),
+        data => {
+          this.setAuth(data.user);
+          this.busy = false;
+        },
         err => this.purgeAuth()
       );
     } else {

@@ -39,6 +39,8 @@ export class AuthComponent implements OnInit {
       // add form control for username if this is the register page
       if (this.authType === 'register') {
         this.authForm.addControl('username', new FormControl());
+        this.authForm.addControl('firstname', new FormControl());
+        this.authForm.addControl('lastname', new FormControl());
       }
     });
   }

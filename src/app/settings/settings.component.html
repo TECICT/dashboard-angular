@@ -3,10 +3,14 @@
         <h1><a routerLink="/">settings</a></h1>
     </div>
     <div *showAuthed="true" class="row">
-        <div class="col-12">
-            <h3>Slideshow</h3>
+        <div *ngIf="!hasPermission" class="col-md-12">
+            <span>It seems like you don't have the right permissions to change the dashboard settings. Please contact your supervisor to get the correct access rights or go back to the <a routerLink="/">home page</a>.</span>
         </div>
-        <div class="col-md-4">
+        <br>
+        <div *ngIf="hasPermission" class="col-md-12">
+            <h3>Slideshow settings</h3>
+        </div>
+        <div *ngIf="hasPermission" class="col-md-4">
             <form>
                 <div class="form-group">
                     <br>
@@ -15,7 +19,7 @@
                 </div>            
             </form>
         </div>
-        <div class="col-lg-8 col-md-12">
+        <div *ngIf="hasPermission" class="col-lg-8 col-md-12">
             <table class="table">
                 <thead>
                 <tr>
@@ -56,9 +60,9 @@
         </div>
     </div>
     <div *showAuthed="true" class="row">
-        <div class="col-md-12">
+        <div *ngIf="hasPermission" class="col-md-12 col-lg-6">
+            <h3>Location settings</h3>
             <br>
-            <h3>other settings</h3>
             <form>
                 <div class="form-group">
                     <label for="location_weather">Location for weather widget</label>
@@ -73,9 +77,70 @@
                 <button type="submit" class="btn tecbtn" (click)="submitForm()" [disabled]="noChanges">Save</button>
             </form>
             <br>
+        </div>
+        <div class="col-md-12 col-lg-6">
+            <h3>User settings</h3>
+            <br>
+            <form [formGroup]="userSettingsForm" (ngSubmit)="submitUserForm()">
+              <fieldset [disabled]="isSubmitting">
+                <fieldset class="form-group">
+                  <label for="username">Username</label>
+                  <input class="form-control"
+                    id="username"
+                    type="text"
+                    placeholder="Username"
+                    formControlName="username" />
+                  <small id="username_help" class="form-text text-muted">This username must be unique.</small>
+                </fieldset>
+
+                <fieldset class="form-group">
+                  <label for="firstname">First name</label>
+                  <input class="form-control"
+                    id="firstname"
+                    type="text"
+                    placeholder="First name"
+                    formControlName="firstname" />
+                </fieldset>
+
+                <fieldset class="form-group">
+                  <label for="lastname">Last name</label>
+                  <input class="form-control"
+                    id="lastname"
+                    type="text"
+                    placeholder="Last name"
+                    formControlName="lastname" />
+                </fieldset>
+
+                <fieldset class="form-group">
+                  <label for="email">Email</label>
+                  <input class="form-control"
+                    id="email"
+                    type="email"
+                    placeholder="Email"
+                    formControlName="email" />
+                </fieldset>
+
+                <fieldset class="form-group">
+                  <label for="new_password">New Password</label>
+                  <input class="form-control"
+                    id="new_password"
+                    type="password"
+                    placeholder="New Password"
+                    formControlName="password" />
+                  <small id="new_password_help" class="form-text text-muted">Give in a new password or leave it open to keep the existing password</small>
+                </fieldset>
+
+                <button class="btn tecbtn"
+                  type="submit">
+                  Update Settings
+                </button>
+
+              </fieldset>
+            </form>
+            <br>
             <button class="btn tecbtnblue"
                 (click)="logout()">
-                Logout.
+                Logout
             </button>
             <br>
         </div>
