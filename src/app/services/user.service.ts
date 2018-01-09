@@ -91,4 +91,10 @@ export class UserService {
     });
   }
 
+  getAllUsers(): Observable<any> {
+    return this.apiService
+    .get('/users')
+    .map(data => data);
+  }
+
 }
