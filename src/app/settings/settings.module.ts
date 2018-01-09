@@ -5,6 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorModule } from '../errors/error.module';
 
 import { SettingsComponent } from './settings.component';
+import { SlideshowSettingsComponent } from './slideshow-settings.component';
+import { LocationSettingsComponent } from './location-settings.component';
+import { UserSettingsComponent } from './user-settings.component';
 
 import { FileUploadModule } from 'ng2-file-upload';
 
@@ -19,7 +22,10 @@ const appRoutes: ModuleWithProviders = RouterModule.forChild([
 
 @NgModule({
   declarations: [
-    SettingsComponent
+    SettingsComponent,
+    SlideshowSettingsComponent,
+    LocationSettingsComponent,
+    UserSettingsComponent
   ],
   imports: [
     BrowserModule,

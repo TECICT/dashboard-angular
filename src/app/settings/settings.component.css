@@ -10,6 +10,18 @@ a:hover {
     text-decoration: none;
 }
 
+slideshow-settings {
+    width: 100%;
+}
+
+location-settings {
+    width: 50%;
+}
+
+user-settings {
+    width: 50%;
+}
+
 .inputfile {
     width: 0.1px;
     height: 0.1px;
