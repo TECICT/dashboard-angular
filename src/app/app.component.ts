@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from './services';
 import { Observable } from 'rxjs';
+import { Http } from '@angular/http'
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,12 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent implements OnInit{
     public online: boolean = false;
+    public src:string = "../assets/offline.png";
     private connectivityTimer;
+
     constructor (
-        private userService: UserService
+        private userService: UserService,
+        private http: Http
     ) {}
 
     ngOnInit() {
@@ -23,6 +27,8 @@ export class AppComponent implements OnInit{
     checkConnectivity() {
         this.online = navigator.onLine;
     }
+
+    
 
 
 }
