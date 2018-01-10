@@ -1,4 +1,5 @@
 <div class="container">
+    <permissions></permissions>
     <div class="row">
         <h1><a routerLink="/">settings</a></h1>
     </div>
@@ -11,7 +12,7 @@
     </div>
     <div *showAuthed="true" class="row">
         <location-settings *ngIf="hasPermission"></location-settings>
-        <user-settings *ngIf="hasPermission"></user-settings>
+        <user-settings></user-settings>
     </div>
     <div *showAuthed="false" class="row">
         <div class="col-md-12">

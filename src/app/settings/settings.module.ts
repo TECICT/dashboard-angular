@@ -8,6 +8,7 @@ import { SettingsComponent } from './settings.component';
 import { SlideshowSettingsComponent } from './slideshow-settings.component';
 import { LocationSettingsComponent } from './location-settings.component';
 import { UserSettingsComponent } from './user-settings.component';
+import { PermissionsComponent } from './permissions.component';
 
 import { FileUploadModule } from 'ng2-file-upload';
 
@@ -25,7 +26,8 @@ const appRoutes: ModuleWithProviders = RouterModule.forChild([
     SettingsComponent,
     SlideshowSettingsComponent,
     LocationSettingsComponent,
-    UserSettingsComponent
+    UserSettingsComponent,
+    PermissionsComponent
   ],
   imports: [
     BrowserModule,
