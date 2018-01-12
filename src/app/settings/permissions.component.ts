@@ -23,9 +23,9 @@ export class PermissionsComponent implements OnInit {
     public selectedUser: User = new User();
     public adminSelected: Boolean = false;
 
-    protected searchStr: string;
-    protected dataService: CompleterData;
-    protected searchData = ['red', 'green', 'blue', 'cyan', 'magenta', 'yellow', 'black'];
+    public searchStr: string;
+    public dataService: CompleterData;
+    public searchData = ['red', 'green', 'blue', 'cyan', 'magenta', 'yellow', 'black'];
 
     public constructor(
       private userService: UserService,
@@ -59,7 +59,7 @@ export class PermissionsComponent implements OnInit {
       )
     }
 
-    protected onSelected(item: any) {
+    onSelected(item: any) {
       this.selectedUser = item.originalObject;
       this.adminSelected = true;
     }
