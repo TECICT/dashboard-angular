@@ -97,4 +97,9 @@ export class UserService {
     .map(data => data);
   }
 
+  makeAdmin(username) {
+    var urlString = '/user/makeadmin/' + username;
+    return this.apiService
+    .get(urlString);
+  }
 }

@@ -1,5 +1,4 @@
 <div class="container">
-    <permissions></permissions>
     <div class="row">
         <h1><a routerLink="/">settings</a></h1>
     </div>
@@ -9,6 +8,7 @@
         </div>
         <br>
         <slideshow-settings *ngIf="hasPermission"></slideshow-settings>
+        <permissions></permissions>
     </div>
     <div *showAuthed="true" class="row">
         <location-settings *ngIf="hasPermission"></location-settings>

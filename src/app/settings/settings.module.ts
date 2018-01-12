@@ -11,6 +11,7 @@ import { UserSettingsComponent } from './user-settings.component';
 import { PermissionsComponent } from './permissions.component';
 
 import { FileUploadModule } from 'ng2-file-upload';
+import { Ng2CompleterModule } from "ng2-completer";
 
 import { SettingsService, ApiService } from '../services';
 
@@ -35,7 +36,8 @@ const appRoutes: ModuleWithProviders = RouterModule.forChild([
     FormsModule,
     ReactiveFormsModule,
     FileUploadModule,
-    ErrorModule
+    ErrorModule,
+    Ng2CompleterModule
   ],
   providers: [
     SettingsService,
