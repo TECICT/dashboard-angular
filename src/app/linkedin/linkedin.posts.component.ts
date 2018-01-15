@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { LinkedInService } from 'angular-linkedin-sdk';
 import { Observable } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -22,6 +22,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   ]
 })
 export class LinkedinPostsComponent {
+  @Output() linkedinLoaded = new EventEmitter();
   public isUserAuthenticated;
   private apiKey;
   posts: string[] = [];
@@ -141,6 +142,7 @@ export class LinkedinPostsComponent {
     }
     this.postNow = this.posts[0];
     this.imageNow = this.postImages[0];
+    this.linkedinLoaded.emit();
 
   }
 

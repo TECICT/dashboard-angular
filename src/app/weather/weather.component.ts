@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { WeatherService, SettingsService } from '../services';
 import { Observable } from 'rxjs';
 
@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./weather.component.css']
 })
 export class WeatherComponent implements OnInit {
+  @Output() weatherLoaded = new EventEmitter();
   weather = {'name': '', 'main': {'temp': 0}};
   icon = '';
   private weatherTimer;
@@ -32,6 +33,7 @@ export class WeatherComponent implements OnInit {
           this.weather = data;
           this.icon = this.translateIcon(data.weather[0].id);
           console.log(this.weather);
+          this.weatherLoaded.emit();
         },
         error => {
           console.log('error getting the weather');

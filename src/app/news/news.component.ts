@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { parseString } from 'xml2js';
 import { Observable } from 'rxjs';
@@ -25,6 +25,7 @@ import { NewsService } from '../services';
     ]
 })
 export class NewsComponent implements OnInit {
+    @Output() newsLoaded = new EventEmitter();
     data: any;
     titles: string[] = [];
     titleNow = '';
@@ -69,6 +70,7 @@ export class NewsComponent implements OnInit {
         }
         this.titleNow = this.titles[0];
         this.descriptionNow = this.descriptions[0];
+        this.newsLoaded.emit();
     }
 
     toggleState() {

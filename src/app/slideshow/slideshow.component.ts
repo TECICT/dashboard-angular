@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 
 import { environment } from '../../environments/environment';
 import { FileUploader } from 'ng2-file-upload';
@@ -12,6 +12,7 @@ import { SettingsService } from '../services';
   styleUrls: ['./slideshow.component.css']
 })
 export class SlideshowComponent implements OnInit{
+  @Output() slideshowLoaded = new EventEmitter();
   src: String = "";
   private slideshowTimer;
 
@@ -42,6 +43,7 @@ export class SlideshowComponent implements OnInit{
       var video = <HTMLVideoElement> videoHTML;
       video = videoHTML as HTMLVideoElement;
       video.load();
+      this.slideshowLoaded.emit();
   }
 
 }
