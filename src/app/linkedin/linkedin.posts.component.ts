@@ -36,9 +36,9 @@ export class LinkedinPostsComponent {
 
   public state = 'full';
 
-  public constructor(private _linkedInService: LinkedInService) {
-  
-  }
+  public constructor(
+    private _linkedInService: LinkedInService,
+  ) {}
 
   ngOnInit() {
     this.subscribeToisInitialized();
@@ -156,7 +156,10 @@ export class LinkedinPostsComponent {
       this.postNow = this.posts[this.counter];
       this.imageNow = this.postImages[this.counter];
       this.counter++;
-      this.toggleState();
     }
+  }
+
+  imageLoaded() {
+    this.toggleState();
   }
 }
