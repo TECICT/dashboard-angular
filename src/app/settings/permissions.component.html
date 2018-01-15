@@ -1,11 +1,15 @@
+<br>
 <h3>Permissions</h3>
-
+<small class="text-muted">In this section, you can add or delete admin users. Admin users are users which are able to view and edit these settings. You can give users admin access by selecting their name and press the 'make admin' button. Only admin users can do this. Please make sure the user already has an account on the site.</small>
+<br>
+<br>
 <table class="table">
     <thead>
     <tr>
         <th>First name</th>
         <th>Last name</th>
         <th>Email</th>
+        <th>Action</th>
     </tr>
     </thead>
     <tbody>
@@ -13,20 +17,23 @@
         <td>{{ user.firstname }}</td>
         <td>{{ user.lastname }}</td>
         <td>{{ user.email }}</td>
+        <td> <button class="btn btn-danger" (click)="makeGuest(user)">X</button> </td>
     </tr>
     </tbody>
 </table>
 
-<br>
 
+<h5>Give a user admin rights:</h5>
+<small class="text-muted">find a user by typing his/her first- or lastname in the input below.</small>
+<br>
 <div class="row">
-    <div class="col-6">
+    <div class="col-md-6 col-sm-12">
         <ng2-completer [(ngModel)]="searchStr" [datasource]="dataService" [minSearchLength]="1" [clearSelected]="true" (selected)="onSelected($event)"></ng2-completer>
     </div>
-    <div class="col-4">
-        <p>Selected: {{selectedUser.firstname}} {{selectedUser.lastname}}</p>
+    <div class="col-md-4 col-sm-12">
+        <p>Selected User: {{selectedUser.firstname}} {{selectedUser.lastname}} {{selectedUser.email}}</p>
     </div>
-    <div class="col-2">
+    <div class="col-md-2 col-sm-12">
         <button class="btn tecbtn" (click)="makeAdmin(selectedUser)" [disabled]="!adminSelected">Make admin</button>
     </div>
 </div>

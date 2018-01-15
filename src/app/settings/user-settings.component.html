@@ -1,66 +1,69 @@
-<div class="col-md-12">
-  <h3>User settings</h3>
-  <br>
-  <form [formGroup]="userSettingsForm" (ngSubmit)="submitUserForm()">
-    <fieldset>
-      <fieldset class="form-group">
-        <label for="username">Username</label>
-        <input class="form-control"
-          id="username"
-          type="text"
-          placeholder="Username"
-          formControlName="username" />
-        <small id="username_help" class="form-text text-muted">This username must be unique.</small>
-      </fieldset>
-
-      <fieldset class="form-group">
-        <label for="firstname">First name</label>
-        <input class="form-control"
-          id="firstname"
-          type="text"
-          placeholder="First name"
-          formControlName="firstname" />
-      </fieldset>
-
-      <fieldset class="form-group">
-        <label for="lastname">Last name</label>
-        <input class="form-control"
-          id="lastname"
-          type="text"
-          placeholder="Last name"
-          formControlName="lastname" />
-      </fieldset>
-
-      <fieldset class="form-group">
-        <label for="email">Email</label>
-        <input class="form-control"
-          id="email"
-          type="email"
-          placeholder="Email"
-          formControlName="email" />
-      </fieldset>
-
-      <fieldset class="form-group">
-        <label for="new_password">New Password</label>
-        <input class="form-control"
-          id="new_password"
-          type="password"
-          placeholder="New Password"
-          formControlName="password" />
-        <small id="new_password_help" class="form-text text-muted">Give in a new password or leave it open to keep the existing password</small>
-      </fieldset>
-
-      <button class="btn tecbtn"
-        type="submit">
-        Update Settings
-      </button>
-
+<br>
+<h3>User settings</h3>
+<small class="text-muted">You can make changes to your user account here. If you don't want to have a new password, leave it blank.</small>
+<br>
+<br>
+<form [formGroup]="userSettingsForm" (ngSubmit)="submitUserForm()">
+  <fieldset>
+    <fieldset class="form-group">
+      <label for="username">Username</label>
+      <input class="form-control"
+        id="username"
+        type="text"
+        placeholder="Username"
+        formControlName="username" />
+      <small id="username_help" class="form-text text-muted">This username must be unique.</small>
     </fieldset>
-  </form>
-  <br>
-  <button class="btn tecbtnblue"
-      (click)="logout()">
-      Logout
-  </button>
-  <br>
-</div>
+
+    <fieldset class="form-group">
+      <label for="firstname">First name</label>
+      <input class="form-control"
+        id="firstname"
+        type="text"
+        placeholder="First name"
+        formControlName="firstname" />
+    </fieldset>
+
+    <fieldset class="form-group">
+      <label for="lastname">Last name</label>
+      <input class="form-control"
+        id="lastname"
+        type="text"
+        placeholder="Last name"
+        formControlName="lastname" />
+    </fieldset>
+
+    <fieldset class="form-group">
+      <label for="email">Email</label>
+      <input class="form-control"
+        id="email"
+        type="email"
+        placeholder="Email"
+        formControlName="email" />
+    </fieldset>
+
+    <fieldset class="form-group">
+      <label for="new_password">New Password</label>
+      <input class="form-control"
+        id="new_password"
+        type="password"
+        placeholder="New Password"
+        formControlName="password" />
+      <small id="new_password_help" class="form-text text-muted">Give in a new password or leave it open to keep the existing password</small>
+    </fieldset>
+
+    <button class="btn tecbtn"
+      type="submit">
+      Update user settings
+    </button>
+
+  </fieldset>
+</form>
+<br>
+<button class="btn tecbtnblue"
+    (click)="logout()">
+    Logout
+</button>
+<br>
+<br>
+

@@ -8,10 +8,8 @@
         </div>
         <br>
         <slideshow-settings *ngIf="hasPermission"></slideshow-settings>
-        <permissions *ngIf="hasPermission"></permissions>
-    </div>
-    <div *showAuthed="true" class="row">
         <location-settings *ngIf="hasPermission"></location-settings>
+        <permissions *ngIf="hasPermission"></permissions>
         <user-settings></user-settings>
     </div>
     <div *showAuthed="false" class="row">

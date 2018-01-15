@@ -102,4 +102,10 @@ export class UserService {
     return this.apiService
     .get(urlString);
   }
+
+  makeGuest(username) {
+    var urlString = '/user/makeguest/' + username;
+    return this.apiService
+    .get(urlString);
+  }
 }

@@ -6,6 +6,10 @@ h3 {
     color: #003443;
 }
 
+h5 {
+    color: #f13b00;
+}
+
 a:hover {
     text-decoration: none;
 }
@@ -38,11 +42,11 @@ permissions {
 }
 
 location-settings {
-    width: 50%;
+    width: 100%;
 }
 
 user-settings {
-    width: 50%;
+    width: 100%;
 }
 
 .inputfile {
@@ -77,6 +81,10 @@ user-settings {
 .tecbtnblue:hover {
     border-style: solid;
     border-color: white;
+}
+
+.btn-danger:hover {
+    cursor: pointer;
 }
 
 .tecbtn {

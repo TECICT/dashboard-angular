@@ -1,18 +1,26 @@
-<div class="col-md-12">
-    <h3>Location settings</h3>
-    <br>
-    <form>
-        <div class="form-group">
-            <label for="location_weather">Location for weather widget</label>
-            <input type="text" class="form-control" id="location_weather" aria-describedby="location_weather_help" [(ngModel)]="settings.location_weather" name="location_weather" (ngModelChange)="enableSave()">
-            <small id="location_weather_help" class="form-text text-muted">Give in the location from which you want to display the weather</small>
+<br>
+<h3>Location settings</h3>
+<small class="text-muted">Here you can set the locations for the weather and maps widget in the dashboard.</small>
+<br>
+<br>
+<form>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="location_weather">Location for weather widget</label>
+                <input type="text" class="form-control" id="location_weather" aria-describedby="location_weather_help" [(ngModel)]="settings.location_weather" name="location_weather" (ngModelChange)="enableSave()">
+                <small id="location_weather_help" class="form-text text-muted">Give in the location from which you want to display the weather</small>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="location_maps">Location for maps widget</label>
-            <input type="text" class="form-control" id="location_maps" aria-describedby="location_maps_help" [(ngModel)]="settings.location_maps" name="location_maps" (ngModelChange)="enableSave()">
-            <small id="location_maps_help" class="form-text text-muted">Give in the location which will be used as the center in the google maps widget</small>
+        <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+                <label for="location_maps">Location for maps widget</label>
+                <input type="text" class="form-control" id="location_maps" aria-describedby="location_maps_help" [(ngModel)]="settings.location_maps" name="location_maps" (ngModelChange)="enableSave()">
+                <small id="location_maps_help" class="form-text text-muted">Give in the location which will be used as the center in the google maps widget</small>
+            </div>
         </div>
-        <button type="submit" class="btn tecbtn" (click)="submitForm()" [disabled]="noChanges">Save</button>
-    </form>
-    <br>
-</div>
+    </div>
+    
+    
+    <button type="submit" class="btn tecbtn" (click)="submitForm()" [disabled]="noChanges">Save location settings</button>
+</form>

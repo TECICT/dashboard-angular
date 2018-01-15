@@ -78,4 +78,17 @@ export class PermissionsComponent implements OnInit {
       );
       
     }
+
+    makeGuest(user) {
+      this.userService.makeGuest(user.username)
+      .subscribe(
+        answer => {
+          this.guestUsers = [];
+          this.adminUsers = [];
+          this.dataService = this.completerService.local(this.guestUsers, 'fullname', 'fullname');
+          this.populateUsers();
+        }
+      );
+      
+    }
 }
