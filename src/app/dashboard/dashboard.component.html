@@ -1,4 +1,7 @@
 <navbar class='navbar'></navbar>
+<div *ngFor="let error of errors">
+  <p>{{ error }} component is not ready yet...</p>
+</div>
 <img src="assets/loading.gif" alt="" class="loading" [@allDone]="stateLoading">
 <!-- Content -->
 <div class="container-fluid" [@allDone]="state">
@@ -18,11 +21,11 @@
       <div class="row row30">
       <!-- Weer widget -->
         <div class="col-3 widget weer">
-          <weather (weatherLoaded)="finishWeather()"></weather>
+          <weather (weatherLoaded)="finishWeather()" *ngIf="refresh"></weather>
         </div> 
         <!-- Kalender widget -->
         <div class="col-9 widget agenda">
-          <news (newsLoaded)="finishNews()"></news>
+          <news (newsLoaded)="finishNews()" *ngIf="refresh"></news>
         </div>
       </div>
     </div>
@@ -31,7 +34,7 @@
       <!-- Linkedin wiget -->
       <div class="row row60"> 
         <div class="col-12 widget linkedin">
-          <linkedin-posts (linkedinLoaded)="finishLinkedin()"></linkedin-posts>
+          <linkedin-posts (linkedinLoaded)="finishLinkedin()" *ngIf="refresh"></linkedin-posts>
         </div>
       </div>
       <!-- Verkeer widget -->

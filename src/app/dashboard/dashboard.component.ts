@@ -27,8 +27,10 @@ export class DashboardComponent {
     mapsDone: boolean = false;
     newsDone: boolean = false;
     allDone: boolean = false;
-    errors = {};
+    errors = [];
     finishedTimer;
+    refreshTimer;
+    refresh: boolean = true;
 
     state = "invisible";
     stateLoading = "visible";
@@ -36,41 +38,42 @@ export class DashboardComponent {
     ngOnInit() {
         this.finishedTimer = Observable.timer(10000, 10000)
         this.finishedTimer.subscribe((t) => this.checkErrors());
+        this.refreshTimer = Observable.timer(60000, 60000)
+        this.refreshTimer.subscribe((t) => this.checkRefresh());
     }
 
     finishWeather() {
-        console.log('1 done');
         this.weatherDone = true;
+        this.removeError('weather');
         this.checkAllDone();
     }
 
     finishSlideshow() {
-        console.log('2 done');
         this.slideshowDone = true;
+        this.removeError('slideshow');
         this.checkAllDone();
     }
 
     finishLinkedin() {
-        console.log('3 done');
         this.linkedinDone = true;
+        this.removeError('linkedin');
         this.checkAllDone();
     }
 
     finishMaps() {
-        console.log('4 done');
         this.mapsDone = true;
+        this.removeError('maps');
         this.checkAllDone();
     }
 
     finishNews() {
-        console.log('5 done');
         this.newsDone = true;
+        this.removeError('news');
         this.checkAllDone();
     }
 
     checkAllDone() {
-        if (this.weatherDone && this.slideshowDone && this.linkedinDone && this.mapsDone && this.newsDone) {
-            console.log('all done');
+        if (this.weatherDone && this.slideshowDone && this.mapsDone && this.newsDone) {
             this.allDone = true;
             this.state = 'visible';
             this.stateLoading = 'invisible'
@@ -79,22 +82,34 @@ export class DashboardComponent {
 
     checkErrors() {
         if (!this.allDone) {
-            if (!this.weatherDone && !('weather' in this.errors)) {
-                this.errors['weather'] = 'weather component is not done yet...';
+            if (!this.weatherDone && this.errors.indexOf('weather') == -1) {
+                this.errors.push('weather');
             }
-            if (!this.slideshowDone && !('slideshow' in this.errors)) {
-                this.errors['slideshow'] = 'slideshow component is not done yet...';
+            if (!this.slideshowDone && this.errors.indexOf('slideshow') == -1) {
+                this.errors.push('slideshow');
             }
-            if (!this.linkedinDone && !('linkedin' in this.errors)) {
-                this.errors['linkedin'] = 'linkedin component is not done yet...';
+            if (!this.linkedinDone && this.errors.indexOf('linkedin') == -1) {
+                this.errors.push('linkedin');
             }
-            if (!this.mapsDone && !('maps' in this.errors)) {
-                this.errors['maps'] = 'maps component is not done yet...';
+            if (!this.mapsDone && this.errors.indexOf('maps') == -1) {
+                this.errors.push('maps');
             }
-            if (!this.newsDone && !('news' in this.errors)) {
-                this.errors['news'] = 'news component is not done yet...';
+            if (!this.newsDone && this.errors.indexOf('news') == -1) {
+                this.errors.push('news');
             }
             console.log(this.errors);
+        }
+    }
+
+    removeError(type) {
+        if (this.errors.indexOf(type) !== -1) {
+            this.errors.splice(this.errors.indexOf(type), 1);
+        }
+    }
+
+    checkRefresh() {
+        if (!this.allDone) {
+            window.location.reload();
         }
     }
 }
