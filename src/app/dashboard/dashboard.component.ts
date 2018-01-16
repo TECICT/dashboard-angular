@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'dashboard',
@@ -26,9 +27,16 @@ export class DashboardComponent {
     mapsDone: boolean = false;
     newsDone: boolean = false;
     allDone: boolean = false;
+    errors = {};
+    finishedTimer;
 
     state = "invisible";
     stateLoading = "visible";
+
+    ngOnInit() {
+        this.finishedTimer = Observable.timer(10000, 10000)
+        this.finishedTimer.subscribe((t) => this.checkErrors());
+    }
 
     finishWeather() {
         console.log('1 done');
@@ -61,12 +69,32 @@ export class DashboardComponent {
     }
 
     checkAllDone() {
-        
         if (this.weatherDone && this.slideshowDone && this.linkedinDone && this.mapsDone && this.newsDone) {
             console.log('all done');
             this.allDone = true;
             this.state = 'visible';
             this.stateLoading = 'invisible'
+        }
+    }
+
+    checkErrors() {
+        if (!this.allDone) {
+            if (!this.weatherDone && !('weather' in this.errors)) {
+                this.errors['weather'] = 'weather component is not done yet...';
+            }
+            if (!this.slideshowDone && !('slideshow' in this.errors)) {
+                this.errors['slideshow'] = 'slideshow component is not done yet...';
+            }
+            if (!this.linkedinDone && !('linkedin' in this.errors)) {
+                this.errors['linkedin'] = 'linkedin component is not done yet...';
+            }
+            if (!this.mapsDone && !('maps' in this.errors)) {
+                this.errors['maps'] = 'maps component is not done yet...';
+            }
+            if (!this.newsDone && !('news' in this.errors)) {
+                this.errors['news'] = 'news component is not done yet...';
+            }
+            console.log(this.errors);
         }
     }
 }

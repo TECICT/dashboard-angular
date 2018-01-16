@@ -9,13 +9,13 @@ h5 {
     color: #F13B00;
     padding-right: 25px;
     text-align: justify;
-    font-size: 25px;
+    font-size: 1.5vw;
 }
 
 .description {
     padding: 0 25px;
     text-align: justify;
-    font-size: 20px;
+    font-size: 1.2vw;
 }
 
 .flexrow {

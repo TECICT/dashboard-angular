@@ -1,5 +1,4 @@
 <navbar class='navbar'></navbar>
-
 <img src="assets/loading.gif" alt="" class="loading" [@allDone]="stateLoading">
 <!-- Content -->
 <div class="container-fluid" [@allDone]="state">
@@ -8,37 +7,37 @@
   <div class="row toprow">
 
     <!-- Linker kolom invoegen  -->
-    <div class="col-8"> 
+    <div class="col-lg-8 col-md-12"> 
 
       <!-- Window voor slideshow -->
       <div class="row row70 widget">
-        <slideshow (slideshowLoaded)="finishSlideshow($event)"></slideshow>
+        <slideshow (slideshowLoaded)="finishSlideshow()"></slideshow>
       </div>
 
       <!-- Rij voor Weer en agenda -->
       <div class="row row30">
       <!-- Weer widget -->
         <div class="col-3 widget weer">
-          <weather (weatherLoaded)="finishWeather($event)"></weather>
+          <weather (weatherLoaded)="finishWeather()"></weather>
         </div> 
         <!-- Kalender widget -->
         <div class="col-9 widget agenda">
-          <news (newsLoaded)="finishNews($event)"></news>
+          <news (newsLoaded)="finishNews()"></news>
         </div>
       </div>
     </div>
     <!-- Kolom voor Linkedin Verkeer -->
-    <div class="col-4">
+    <div class="col-lg-4 col-md-12">
       <!-- Linkedin wiget -->
       <div class="row row60"> 
         <div class="col-12 widget linkedin">
-          <linkedin-posts (linkedinLoaded)="finishLinkedin($event)"></linkedin-posts>
+          <linkedin-posts (linkedinLoaded)="finishLinkedin()"></linkedin-posts>
         </div>
       </div>
       <!-- Verkeer widget -->
       <div class="row row40"> 
         <div class="col-12 widget Verkeer">
-          <maps (mapsLoaded)="finishMaps($event)"></maps>
+          <maps (mapsLoaded)="finishMaps()"></maps>
         </div>
       </div>
     </div>
