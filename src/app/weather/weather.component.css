@@ -13,3 +13,21 @@
     justify-content: center;
     align-items: center
 }
+
+h1 {
+    font-size: 40px;
+}
+
+h3 {
+    font-size: 30px;
+}
+
+@media screen and (max-width: 800px) {
+  h1 {
+    font-size: 25px;  
+  }
+
+  h3 {
+    font-size: 17px;
+  }
+}

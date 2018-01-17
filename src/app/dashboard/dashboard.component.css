@@ -49,11 +49,25 @@
     padding: 0;
 }
 
-
+[class*="col-"]{
+    height: 100%;
+}
 
 .widget {
     border-style: solid;
     border-color: #003443;
     text-align: center;
     padding: 0;
+}
+
+slideshow {
+    height: 100%;
+}
+
+news {
+    height: 100%;
+}
+
+linkedin-posts {
+    height: 100%;
 }

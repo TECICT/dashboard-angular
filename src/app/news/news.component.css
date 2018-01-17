@@ -9,17 +9,21 @@ h5 {
     color: #F13B00;
     padding-right: 25px;
     text-align: justify;
-    font-size: 1.5vw;
+    font-size: 25px;
 }
 
 .description {
     padding: 0 25px;
     text-align: justify;
-    font-size: 1.2vw;
+    font-size: 20px;
 }
 
-.flexrow {
-    flex: 0.98;
+.titlerow {
+    height: 30%;
+}
+
+.descriptionrow {
+    height: 70%;
 }
 
 img {
@@ -31,4 +35,28 @@ img {
     align-items: center;
     justify-content: center;
     padding-left: 0;
+}
+
+[class*="col-"]{
+    height: 100%;
+}
+
+@media screen and (max-width: 1400px) {
+  h5 {
+    font-size: 20px;  
+  }
+
+  .description {
+    font-size: 17px;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  h5 {
+    font-size: 17px;  
+  }
+
+  .description {
+    font-size: 14px;
+  }
 }

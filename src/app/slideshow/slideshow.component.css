@@ -8,3 +8,7 @@ video_poster {
     height: 100%;
     width: 100%;
 }
+
+[class*="col-"]{
+    height: 100%;
+}
