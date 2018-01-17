@@ -168,7 +168,7 @@ export class LinkedinPostsComponent {
   }
 
   checkLinkedin() {
-    if (this.posts == []) {
+    if (this.posts.length == 0) {
       this.subscribeToisInitialized();
     }
   }
