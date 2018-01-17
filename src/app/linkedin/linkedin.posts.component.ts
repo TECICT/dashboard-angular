@@ -32,6 +32,7 @@ export class LinkedinPostsComponent {
   showlogin: Boolean = true;
   private animationTimer;
   private linkedinTimer;
+  private refreshTimer;
   private counter = 0;
   totalData = 0;
 
@@ -48,6 +49,8 @@ export class LinkedinPostsComponent {
     this.linkedinTimer.subscribe((t) => this.rawApiCall());
     this.animationTimer = Observable.timer(0, 10000);
     this.animationTimer.subscribe((t) => this.toggleState());
+    this.refreshTimer = Observable.timer(30000, 30000)
+    this.refreshTimer.subscribe((t) => this.checkLinkedin());
   }
 
   getApiKeyFromSdkIN() {
@@ -59,12 +62,14 @@ export class LinkedinPostsComponent {
     this._linkedInService.login().subscribe({
       next: (state) => {
         // state will always return true when login completed
+        this.showlogin = false;
+        this.rawApiCall();
       },
       complete: () => {
         // Completed
         console.log('login Linkedin complete');
         this.showlogin = false;
-        this.rawApiCall();     
+        this.rawApiCall();
       }
     });
   }
@@ -85,6 +90,7 @@ export class LinkedinPostsComponent {
     this._linkedInService.isInitialized$.subscribe({
       next: (state) => {
         // state will always return true when API finishes loading
+        this.subscribeToLogin();
       },
       complete: () => {
         // this.getApiKeyFromSdkIN();
@@ -158,6 +164,12 @@ export class LinkedinPostsComponent {
       this.postNow = this.posts[this.counter];
       this.imageNow = this.postImages[this.counter];
       this.counter++;
+    }
+  }
+
+  checkLinkedin() {
+    if (this.posts == []) {
+      this.subscribeToisInitialized();
     }
   }
 

@@ -38,8 +38,8 @@ export class DashboardComponent {
     ngOnInit() {
         this.finishedTimer = Observable.timer(10000, 10000)
         this.finishedTimer.subscribe((t) => this.checkErrors());
-        this.refreshTimer = Observable.timer(60000, 60000)
-        this.refreshTimer.subscribe((t) => this.checkRefresh());
+        // this.refreshTimer = Observable.timer(60000, 60000)
+        // this.refreshTimer.subscribe((t) => this.checkRefresh());
     }
 
     finishWeather() {
@@ -107,9 +107,9 @@ export class DashboardComponent {
         }
     }
 
-    checkRefresh() {
-        if (!this.allDone) {
-            window.location.reload();
-        }
-    }
+    // checkRefresh() {
+    //     if (!this.allDone) {
+    //         window.location.reload();
+    //     }
+    // }
 }
