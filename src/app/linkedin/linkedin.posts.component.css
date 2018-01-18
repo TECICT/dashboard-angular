@@ -10,7 +10,7 @@
 }
 
 .linkedinpicture {
-    height: 6vw;
+    height: 100px;
 }
 
 .left-align {
@@ -20,14 +20,18 @@
 }
 
 .title {
-    font-size: 1.1vw;
+    font-size: 22px;
     color: #003443;
 }
 
 .linkedin {
     background: white;
     height: 100%;
-    display: flex;
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display:flex;
     flex-flow: column;
 }
 
@@ -35,32 +39,16 @@
     padding: 0;
 }
 
-.row60 {
-    max-height: 60%;
-
-}
-
-.row50 {
-    height: 50%;
-}
-
-.row40 {
-    max-height: 40%;
-}
-
 .flexrow {
     flex: 0.99;
 }
 
-.vcenter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-}
-
 .text {
-    display: flex;
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display:flex;
     justify-content: center;
     padding: 0;
     padding-left: 5px;
@@ -76,10 +64,48 @@ a:hover {
 
 .imagecol {
     padding-right: 20px;
-    padding-left: 0;
+    padding-left: 5px;
 }
 
 .jobdescription {
     padding: 0 20px;
     text-align: justify;
+}
+
+@media screen and (max-width: 1530px) {
+  .linkedinpicture {
+    height: 80px;
+    padding-top: 8px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .linkedinpicture {
+    height: 70px;
+    padding-top: 8px;
+  }
+
+  .title {
+    font-size: 17px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .linkedinpicture {
+    height: 100px;
+    padding-top: 0px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .empty {
+    flex: 0;
+    height: 0;
+  }
 }
