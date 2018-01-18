@@ -29,6 +29,7 @@ export class LinkedinPostsComponent {
   postImages: string[] = [];
   postNow: string = '';
   imageNow: string = '';
+  imageNowPreload: string = '';
   showlogin: Boolean = true;
   private animationTimer;
   private linkedinTimer;
@@ -147,7 +148,7 @@ export class LinkedinPostsComponent {
         
     }
     this.postNow = this.posts[0];
-    this.imageNow = this.postImages[0];
+    this.imageNowPreload = this.postImages[0];
     this.linkedinLoaded.emit();
 
   }
@@ -162,7 +163,7 @@ export class LinkedinPostsComponent {
         this.counter = 0;
       }
       this.postNow = this.posts[this.counter];
-      this.imageNow = this.postImages[this.counter];
+      this.imageNowPreload = this.postImages[this.counter];
       this.counter++;
     }
   }

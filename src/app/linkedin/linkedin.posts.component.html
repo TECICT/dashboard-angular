@@ -14,7 +14,9 @@
         <div class="col-lg-10 col-md-12 imagecol">
             <button (click)="subscribeToLogin()" class="btn btn-primary" [hidden]='!showlogin'>login</button>
             <button (click)="subscribeToLogout()" class="btn btn-primary" [hidden]='!showlogin'>logout</button>
-            <img class="postimage" src="{{this.imageNow}}" (load)="imageLoaded()" alt="">
+            <div class="postimagediv" [style.background-image]="'url(' + imageNow + ')'">
+            </div>
+            <img class="postimage" src="{{this.imageNowPreload}}" (load)="imageNow = imageNowPreload; imageLoaded();" alt="" hidden>
         </div>
     </div> 
 </div>
