@@ -160,7 +160,12 @@ export class LinkedinPostsComponent {
         this.counter = 0;
       }
       this.postNow = this.posts[this.counter];
-      this.imageNowPreload = this.postImages[this.counter];
+      if (this.imageNowPreload == this.postImages[this.counter]) {
+        this.toggleState();
+      }
+      else {
+        this.imageNowPreload = this.postImages[this.counter];
+      }
       this.counter++;
     }
   }
