@@ -1,48 +1,16 @@
-<navbar class='navbar'></navbar>
-<div *ngFor="let error of errors">
-  <p>{{ error }} component is not ready yet...</p>
-</div>
 <img src="assets/loading.gif" alt="" class="loading" [@allDone]="stateLoading">
-<!-- Content -->
-<div class="container-fluid" [@allDone]="state">
-
-  <!-- Volledige hoogte container opsplitsen -->
-  <div class="row toprow">
-
-    <!-- Linker kolom invoegen  -->
-    <div class="col-lg-8 col-md-12"> 
-
-      <!-- Window voor slideshow -->
-      <div class="row row70 widget">
-        <slideshow (slideshowLoaded)="finishSlideshow()"></slideshow>
-      </div>
-
-      <!-- Rij voor Weer en agenda -->
-      <div class="row row30">
-      <!-- Weer widget -->
-        <div class="col-3 widget weer">
-          <weather (weatherLoaded)="finishWeather()" *ngIf="refresh"></weather>
-        </div> 
-        <!-- Kalender widget -->
-        <div class="col-9 widget agenda">
-          <news (newsLoaded)="finishNews()" *ngIf="refresh"></news>
-        </div>
-      </div>
-    </div>
-    <!-- Kolom voor Linkedin Verkeer -->
-    <div class="col-lg-4 col-md-12">
-      <!-- Linkedin wiget -->
-      <div class="row row60"> 
-        <div class="col-12 widget linkedin">
-          <linkedin-posts (linkedinLoaded)="finishLinkedin()" *ngIf="refresh"></linkedin-posts>
-        </div>
-      </div>
-      <!-- Verkeer widget -->
-      <div class="row row40"> 
-        <div class="col-12 widget Verkeer">
-          <maps (mapsLoaded)="finishMaps()"></maps>
-        </div>
-      </div>
-    </div>
+<div class="headwrapper" [@allDone]="state">
+  <navbar></navbar>
+  <!-- <div *ngFor="let error of errors">
+    <p>{{ error }} component is not ready yet...</p>
+  </div>
+  <img src="assets/loading.gif" alt="" class="loading" [@allDone]="stateLoading"> -->
+  <div class="wrapper" >
+    <slideshow (slideshowLoaded)="finishSlideshow()"></slideshow>
+    <weather (weatherLoaded)="finishWeather()" *ngIf="refresh"></weather>
+    <news (newsLoaded)="finishNews()" *ngIf="refresh"></news>
+    <linkedin-posts (linkedinLoaded)="finishLinkedin()" *ngIf="refresh"></linkedin-posts>
+    <maps (mapsLoaded)="finishMaps()"></maps>
   </div>
 </div>
+

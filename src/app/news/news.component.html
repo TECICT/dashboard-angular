@@ -1,15 +1,9 @@
 <div class="news" [@newNewsItem]="state" (@newNewsItem.done)="setNewItem()">
-    <div class="row titlerow">
-        <div class="col-2">
-            <img src="https://pbs.twimg.com/profile_images/899605076695764992/rAr1pvdZ_400x400.jpg" alt="">
-        </div>
-        <div class="col-10 vcenter">
-            <span>
-                <h5><i>"{{this.titleNow}}"</i></h5>
-            </span>
-        </div>
-    </div>
-    <div class="description descriptionrow">
+    <img src="https://pbs.twimg.com/profile_images/899605076695764992/rAr1pvdZ_400x400.jpg" alt="" class="newsimage">
+    <span class="title">
+        <h5><i>"{{this.titleNow}}"</i></h5>
+    </span>
+    <!-- <div class="description">
         {{this.descriptionNow}}
-    </div>
+    </div> -->
 </div>
