@@ -92,9 +92,9 @@ maps {
     }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1050px) {
     .wrapper {
-        grid-template-rows: 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12%;
+        grid-template-rows: 28vw 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12% 12%;
         grid-template-columns: 100%;
     }
 

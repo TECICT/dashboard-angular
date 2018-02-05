@@ -31,7 +31,7 @@ h3 {
     grid-template-columns: 50% 50%;
 }
 
-@media screen and (max-width: 1000px) {
+/*@media screen and (max-width: 1000px) {
   h1 {
     font-size: 40px;  
   }
@@ -39,7 +39,7 @@ h3 {
   h3 {
     font-size: 30px;
   }
-}
+}*/
 
 @media screen and (max-width: 1400px) {
   h1 {
@@ -51,8 +51,12 @@ h3 {
   }
 }
 
-@media screen and (max-height: 750px) {
-  .weather {
-    flex-direction: row;
+@media screen and (max-width: 1050px) {
+  h1 {
+    font-size: 40px;  
+  }
+
+  h3 {
+    font-size: 30px;
   }
 }
