@@ -9,7 +9,7 @@ import { Http } from '@angular/http'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-    public online: boolean = false;
+    public online: boolean = true;
     public src:string = "../assets/offline.png";
     private connectivityTimer;
 
