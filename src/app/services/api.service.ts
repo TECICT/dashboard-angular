@@ -27,14 +27,15 @@ export class ApiService {
   }
 
   private formatErrors(error: any) {
-    console.log(error);
-    return Observable.throw(error.json());
+    return Observable.throw(error.json().error  || 'Server error');
   }
 
   get(path: string, params: URLSearchParams = new URLSearchParams()): Observable<any> {
     return this.http.get(`${environment.api_url}${path}`, { headers: this.setHeaders(), search: params })
-    .catch(this.formatErrors)
-    .map((res:Response) => res.json());
+    .map(
+      (res:Response) => res.json()
+    )
+    .catch(this.formatErrors);
   }
 
   put(path: string, body: Object = {}): Observable<any> {
