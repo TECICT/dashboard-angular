@@ -22,7 +22,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   ]
 })
 export class LinkedinPostsComponent {
-  @Output() linkedinLoaded = new EventEmitter();
+  @Output() linkedinLoaded = new EventEmitter<boolean>();
   public isUserAuthenticated;
   private apiKey;
   posts: string[] = [];
@@ -103,12 +103,11 @@ export class LinkedinPostsComponent {
       .asObservable()
       .subscribe({
         next: (data) => {
-          console.log(data);
           this.parseData(data);
         },
         error: (err) => {
-          console.log('error');
           console.log(err);
+          this.linkedinLoaded.emit(false);
         },
         complete: () => {
           console.log('RAW API call completed');
@@ -146,7 +145,7 @@ export class LinkedinPostsComponent {
     }
     this.postNow = this.posts[0];
     this.imageNowPreload = this.postImages[0];
-    this.linkedinLoaded.emit();
+    this.linkedinLoaded.emit(true);
 
   }
 

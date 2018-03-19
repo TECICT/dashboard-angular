@@ -1,4 +1,8 @@
-<video #videoplayer id="videoplayer" preload="none" autoplay loop>
-    <source [src]="src" type="video/mp4">
-    Your browser does not support the video tag. 
-</video> 
+<div class="frame">
+    <video #videoplayer id="videoplayer" preload="none" autoplay loop *ngIf="serverOnline">
+        <source [src]="src" type="video/mp4">
+        Your browser does not support the video tag. 
+    </video>
+    <img class="backupimg" src="../../assets/Presentatie_DOWN.png" *ngIf="!serverOnline">
+</div>
+

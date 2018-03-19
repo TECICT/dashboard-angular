@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./weather.component.css']
 })
 export class WeatherComponent implements OnInit {
-  @Output() weatherLoaded = new EventEmitter();
+  @Output() weatherLoaded: EventEmitter<any> = new EventEmitter<any>();
   weather = {'name': '', 'main': {'temp': 0}};
   icon = '';
   private weatherTimer;
@@ -26,20 +26,35 @@ export class WeatherComponent implements OnInit {
 
   getWeather() {
     this.settingsService.get()
-    .subscribe(settings => {
-      this.weatherService.get(settings.location_weather)
-      .subscribe(
-        data => {
-          this.weather = data;
-          this.icon = this.translateIcon(data.weather[0].id);
-          console.log(this.weather);
-          this.weatherLoaded.emit();
-        },
-        error => {
-          console.log('error getting the weather');
-        }
-      );
-    });
+    .subscribe(
+      settings => {
+        this.weatherService.get(settings.location_weather)
+        .subscribe(
+          data => {
+            if (data.error) {
+              if (this.weather.name == '') this.weather.name = 'Unavailable';
+              this.weatherLoaded.emit(true);
+              setTimeout(() => this.getWeather(), 2000);
+            } else {
+              this.weather = data;
+              this.icon = this.translateIcon(data.weather[0].id);
+              this.weatherLoaded.emit(true);
+            }
+          },
+          error => {
+            if (this.weather.name == '') this.weather.name = 'Unavailable';
+            this.weatherLoaded.emit(true);
+            setTimeout(() => this.getWeather(), 2000);
+            
+          }
+        );
+      },
+      error => {
+        if (this.weather.name == '') this.weather.name = 'Unavailable';
+        this.weatherLoaded.emit(true);
+        setTimeout(() => this.getWeather(), 2000);
+      }
+    );
     
   }
 
