@@ -10,6 +10,7 @@ import { MapsModule } from '../maps/maps.module';
 import { WeatherModule } from '../weather/weather.module';
 import { NavbarModule } from '../navbar/navbar.module';
 import { NewsModule } from '../news/news.module';
+import { ListModule } from '../list/list.module';
 
 const appRoutes: ModuleWithProviders = RouterModule.forChild([
   {
@@ -35,6 +36,7 @@ const appRoutes: ModuleWithProviders = RouterModule.forChild([
     WeatherModule,
     NavbarModule,
     NewsModule,
+    ListModule,
     appRoutes
   ],
   providers: [],

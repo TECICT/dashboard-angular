@@ -1,0 +1,18 @@
+<img src="assets/loading.gif" alt="" class="loading" [@allDone]="stateLoading">
+<div class="headwrapper" [@allDone]="state">
+  <navbar></navbar>
+  <!-- <div *ngFor="let error of errors">
+    <p>{{ error }} component is not ready yet...</p>
+  </div>
+  <img src="assets/loading.gif" alt="" class="loading" [@allDone]="stateLoading"> -->
+  <div class="wrapper" >
+    <slideshow (slideshowLoaded)="finishSlideshow()"></slideshow>
+    <weather (weatherLoaded)="finishWeather()" *ngIf="refresh"></weather>
+    <news (newsLoaded)="finishNews()" *ngIf="refresh"></news>
+    <!-- complete list = ['acute', 'bench', 'jobOffer', 'starter', 'stopper'] -->
+    <list *ngIf="refresh" [include]="['acute', 'jobOffer', 'starter', 'stopper']" routerLink="/listsettings" ></list>
+    <!-- <linkedin-posts (linkedinLoaded)="finishLinkedin()" *ngIf="refresh"></linkedin-posts> -->
+    <maps (mapsLoaded)="finishMaps()"></maps>
+  </div>
+</div>
+

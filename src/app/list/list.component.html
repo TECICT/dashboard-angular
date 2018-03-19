@@ -1,0 +1,140 @@
+<div class="list" [@newList]="state" (@newList.done)="changeList()">
+    <div *ngIf="include[currentItem] == 'acute'">
+        <h1>Acute lijst</h1>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Voornaam</th>
+              <th scope="col">Achternaam</th>
+              <th scope="col">Functie</th>
+              <th scope="col">Beschikbaarheid</th>
+              <th scope="col">Zelfstandige</th>
+              <th scope="col">Account Manager</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of lists.acute">
+              <td>{{item.firstName}}</td>
+              <td>{{item.lastName}}</td>
+              <td>{{item.function}}</td>
+              <td>{{item.availability}}</td>
+              <td>
+                <span class="glyphicon glyphicon-ok" aria-hidden="true" *ngIf="!item.payroll"></span>
+                <span class="glyphicon glyphicon-remove" aria-hidden="true" *ngIf="item.payroll"></span>
+              </td>
+              <td>{{item.accountManager}}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="include[currentItem] == 'bench'">
+        <h1>Bank</h1>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Voornaam</th>
+              <th scope="col">Achternaam</th>
+              <th scope="col">Functie</th>
+              <th scope="col">Beschikbaar sinds</th>
+              <th scope="col">Account Manager</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of lists.bench">
+              <td>{{item.firstName}}</td>
+              <td>{{item.lastName}}</td>
+              <td>{{item.function}}</td>
+              <td>{{item.since}}</td>
+              <td>{{item.accountManager}}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="include[currentItem] == 'jobOffer'">
+        <h1>Vacatures</h1>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Naam</th>
+              <th scope="col">Klant</th>
+              <th scope="col">Account Manager</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of lists.jobOffer">
+              <td>{{item.name}}</td>
+              <td>{{item.customer}}</td>
+              <td>{{item.accountManager}}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="include[currentItem] == 'starter'">
+        <h1>Starters</h1>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Voornaam</th>
+              <th scope="col">Achternaam</th>
+              <th scope="col">Functie</th>
+              <th scope="col">startdag</th>
+              <th scope="col">klant</th>
+              <th scope="col">Administratie ok?</th>
+              <th scope="col">Account Manager</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of lists.starter" [style.background-color]="getBackgroundcolor(!item.administrationDone)">
+              <td>{{item.firstName}}</td>
+              <td>{{item.lastName}}</td>
+              <td>{{item.function}}</td>
+              <td>{{item.startDate}}</td>
+              <td>{{item.customer}}</td>
+              <td>
+                <span class="glyphicon glyphicon-ok" aria-hidden="true" *ngIf="item.administrationDone"></span>
+                <span class="glyphicon glyphicon-remove" aria-hidden="true" *ngIf="!item.administrationDone"></span>
+              </td>
+              <td>{{item.accountManager}}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="include[currentItem] == 'stopper'">
+        <h1>Stoppers</h1>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Voornaam</th>
+              <th scope="col">Achternaam</th>
+              <th scope="col">Functie</th>
+              <th scope="col">topDatum</th>
+              <th scope="col">vervangbaar?</th>
+              <th scope="col">bevestigd?</th>
+              <th scope="col">Account Manager</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of lists.stopper" [style.background-color]="getBackgroundcolor(item.confirmed)">
+              <td>{{item.firstName}}</td>
+              <td>{{item.lastName}}</td>
+              <td>{{item.function}}</td>
+              <td>{{item.topDate}}</td>
+              <td>
+                <span class="glyphicon glyphicon-ok" aria-hidden="true" *ngIf="item.replaceable"></span>
+                <span class="glyphicon glyphicon-remove" aria-hidden="true" *ngIf="!item.replaceable"></span>
+              </td>
+              <td>
+                <span class="glyphicon glyphicon-ok" aria-hidden="true" *ngIf="item.confirmed"></span>
+                <span class="glyphicon glyphicon-remove" aria-hidden="true" *ngIf="!item.confirmed"></span>
+              </td>
+              <td>{{item.accountManager}}</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+
+</div>

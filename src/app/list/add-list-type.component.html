@@ -1,0 +1,43 @@
+<!-- <div class="container">
+    <h3>Voeg nieuwe lijst toe</h3>
+
+    <form [formGroup]="listForm" (ngSubmit)="addList(listForm.value)" >
+        <input
+        placeholder="List name"
+        class="form-control form-control-lg"
+        formControlName="listName"
+        [(ngModel)]="list.listName"
+        type="text"/>
+        <div class="text-danger" *ngIf="!listForm.controls['listName'].valid && listForm.controls['listName'].touched ">
+            There needs to be a name for this list
+        </div>
+        <br>
+
+        <div class="row" *ngFor="let label of list.labels; let i = index">
+            <div class="col-sm-6 col-xs-12">
+                <input
+                placeholder="key"
+                class="form-control form-control-lg"
+                [ngModelOptions]="{standalone: true}"
+                [(ngModel)]="label.key"
+                type="text"/>
+            </div>
+            <div class="col-sm-5 col-xs-11">
+                <select class="form-control form-control-lg" [ngModelOptions]="{standalone: true}"
+                [(ngModel)]="label.type">
+                    <option value="text">text</option>
+                    <option value="number">number</option>
+                    <option value="checkbox">checkbox</option>
+                    <option value="Date">Date</option>
+                </select>
+            </div>
+            <div class="col-sm-1">
+                <button type="button" class="btn tecbtn" (click)="deleteLabel(i)">X</button>
+            </div>
+        </div>
+        <br>
+        <button type="button" class="btn tecbtn" (click)="addLabel()">+</button>
+        <button class="btn" type="submit">Create</button>
+    </form>
+</div>
+ -->
