@@ -1,4 +1,16 @@
+.frame {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+}
+
 video {
+    /* autoprefixer: off */
+    grid-column: 1;
+    /* autoprefixer: off */
+    grid-row: 1;
     height: 100%;
     width: 100%;
     object-fit: fill;
@@ -11,4 +23,15 @@ video_poster {
 
 [class*="col-"]{
     height: 100%;
+}
+
+img {
+    /* autoprefixer: off */
+    grid-column: 1;
+    /* autoprefixer: off */
+    grid-row: 1;
+    height: 100%;
+    width: auto;
+    align-self: center;
+    justify-self: center;
 }
