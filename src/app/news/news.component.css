@@ -1,15 +1,18 @@
 .news {
-    background: white;
     height: 100%;
     width: 100%;
     display: grid;
     grid-template-rows: 100%;
     grid-template-columns: 15% 85%;
+    min-height: 0;
+    min-width: 0;
 }
 
 .title {
     grid-column: 2;
     align-self: center;
+    min-width: 0;
+    overflow: hidden;
 }
 
 .newsimage {
@@ -18,6 +21,8 @@
     max-width: 100%;
     align-self: center;
     justify-self: center;
+    min-width: 0;
+    overflow: hidden;
 }
 
 h5 {
