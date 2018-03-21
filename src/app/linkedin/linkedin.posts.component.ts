@@ -10,7 +10,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   animations: [
       trigger('newLinkedinItem', [
           state('middle', style({
-              opacity: 0
+              opacity: 0,
           })),
           state('full' , style({
               opacity: 1

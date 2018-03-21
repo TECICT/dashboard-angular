@@ -28,7 +28,7 @@ export class NewsComponent implements OnInit {
     @Output() newsLoaded = new EventEmitter<boolean>();
     data: any;
     titles: string[] = [];
-    titleNow = '';
+    titleNow: string = '';
     descriptionNow = '';
     descriptions: string[] = [];
     private animationTimer;
@@ -63,7 +63,9 @@ export class NewsComponent implements OnInit {
                 }
             },
             error => {
-                if (this.titleNow == '') this.errorMessage();
+                if (!this.titleNow) {
+                    this.errorMessage();
+                }
                 this.newsLoaded.emit(true);
                 this.getNews();
             }

@@ -1,6 +1,6 @@
-<div class="news" [@newNewsItem]="state" (@newNewsItem.done)="setNewItem()">
+<div class="news">
     <img src="https://pbs.twimg.com/profile_images/899605076695764992/rAr1pvdZ_400x400.jpg" alt="" class="newsimage">
-    <span class="title">
+    <span class="title" [@newNewsItem]="state" (@newNewsItem.done)="setNewItem()">
         <h5><i>{{this.titleNow}}</i></h5>
     </span>
     <!-- <div class="description">
