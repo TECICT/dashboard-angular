@@ -36,7 +36,7 @@ export class DashboardComponent {
     stateLoading = "visible";
 
     ngOnInit() {
-        this.finishedTimer = Observable.timer(10000, 10000)
+        this.finishedTimer = Observable.timer(600000, 600000)
         this.finishedTimer.subscribe((t) => this.checkErrors());
         // this.refreshTimer = Observable.timer(60000, 60000)
         // this.refreshTimer.subscribe((t) => this.checkRefresh());
@@ -74,20 +74,20 @@ export class DashboardComponent {
 
     checkAllDone() {
         this.stateLoading = "invisible";
+        if (this.weatherState == 'visible' &&
+            this.slideshowState == 'visible' &&
+            this.linkedinState == 'visible' &&
+            this.mapsState == 'visible' &&
+            this.newsState == 'visible') {
+            this.allDone = true;
+        } else {
+            this.allDone = false
+        }
     }
 
     checkErrors() {
+        if (!this.allDone) {
+            window.location.reload();
+        }
     }
-
-    // removeError(type) {
-    //     if (this.errors.indexOf(type) !== -1) {
-    //         this.errors.splice(this.errors.indexOf(type), 1);
-    //     }
-    // }
-
-    // checkRefresh() {
-    //     if (!this.allDone) {
-    //         window.location.reload();
-    //     }
-    // }
 }
