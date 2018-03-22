@@ -107,14 +107,14 @@ maps {
     linkedin-posts {
         grid-column: 1;
         /* autoprefixer: off */
-        grid-row: 4;
+        grid-row: 5;
         z-index: 0;
     }
 
     maps {
         grid-column: 1;
         /* autoprefixer: off */
-        grid-row: 5;
+        grid-row: 4;
         z-index: -1;
     }
 }
