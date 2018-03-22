@@ -1,6 +1,6 @@
 <div class="linkedinwrapper">
     <div class="toprow">
-        <img class="linkedinpicture" src="https://lh3.googleusercontent.com/-cTMuJhKkzAc/UfGZGGGggbI/AAAAAAAAak0/c1zFHbniZOcAMzGpR98t8wsHtHVE7beQACJoC/w722-h722/LinkedIn-Google-Plus-Profile-Pic-01.png" alt="">
+        <img class="linkedinpicture" src="../../assets/linkedin_logo.png" alt="">
         <div class="title" [@newLinkedinItem]="state" (@newLinkedinItem.done)="setNewItem()">
             <b><span [innerHTML]="this.postNow | linky:{ className: 'myLink' }"></span></b>
         </div>
@@ -9,5 +9,5 @@
         <!-- <button (click)="subscribeToLogin()" class="btn btn-primary" [hidden]='!showlogin'>login</button>
         <button (click)="subscribeToLogout()" class="btn btn-primary" [hidden]='!showlogin'>logout</button> -->
     <div class="postimagediv" [style.background-image]="'url(' + imageNow + ')'" [@newLinkedinItem]="state"></div>
-    <img class="postimage" src="{{this.imageNowPreload}}" (load)="imageNow = imageNowPreload; imageLoaded();" alt="" hidden>
+    <img class="postimage" id="postimage" src="{{this.imageNowPreload}}" (load)="imageNow = imageNowPreload; imageLoaded($event);" alt="" hidden>
 </div> 
