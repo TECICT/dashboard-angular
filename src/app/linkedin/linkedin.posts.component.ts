@@ -126,15 +126,15 @@ export class LinkedinPostsComponent {
             this.posts[i] = data.values[i].updateContent.companyStatusUpdate.share.comment;
             if ('content' in data.values[i].updateContent.companyStatusUpdate.share) {
               this.postImages[i] = data.values[i].updateContent.companyStatusUpdate.share.content.submittedImageUrl;
-              if (this.posts[i].length > 140) {
-                var substr1 = this.posts[i].substring(0,140);
-                var substr2 = this.posts[i].substring(141);
-                this.posts[i] = substr1 + substr2.substring(0, substr2.indexOf(' ')) + "... Read more at linkedin.com/company/44163";
+              if (this.posts[i].length > 200) {
+                var substr1 = this.posts[i].substring(0,200);
+                var substr2 = this.posts[i].substring(201);
+                this.posts[i] = substr1 + substr2.substring(0, substr2.indexOf('.') < substr2.indexOf('!')? substr2.indexOf('.'): substr2.indexOf('!')) + "... Read more at linkedin.com/company/44163";
               }
             } else {
               this.postImages[i] = '';
-              if (this.posts[i].length > 800) {
-                this.posts[i] = this.posts[i].substring(0,900) + "...";
+              if (this.posts[i].length > 1000) {
+                this.posts[i] = this.posts[i].substring(0,1000) + "...";
               }
             }
         } else if ('companyJobUpdate' in data.values[i].updateContent) {
@@ -175,7 +175,7 @@ export class LinkedinPostsComponent {
     }
   }
 
-  imageLoaded() {
+  imageLoaded(evt) {
     this.toggleState();
   }
 }

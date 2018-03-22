@@ -1,5 +1,5 @@
 <div class="frame">
-    <video #videoplayer id="videoplayer" preload="none" autoplay loop *ngIf="serverOnline">
+    <video muted #videoplayer id="videoplayer" preload="none" autoplay loop *ngIf="serverOnline">
         <source [src]="src" type="video/mp4">
         Your browser does not support the video tag. 
     </video>
