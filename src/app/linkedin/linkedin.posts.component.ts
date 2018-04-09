@@ -77,7 +77,7 @@ export class LinkedinPostsComponent {
   public subscribeToLogout(){
     this._linkedInService.logout().subscribe({
       next: () => {
-        // does not emit a value 
+        // does not emit a value
       },
       complete: () => {
         console.log('linkedin logged out');

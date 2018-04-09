@@ -76,7 +76,6 @@ export class PermissionsComponent implements OnInit {
           this.populateUsers();
         }
       );
-      
     }
 
     makeGuest(user) {
@@ -89,6 +88,5 @@ export class PermissionsComponent implements OnInit {
           this.populateUsers();
         }
       );
-      
     }
 }

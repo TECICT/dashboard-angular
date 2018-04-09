@@ -3,7 +3,7 @@ let win;
 function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 600, 
+    width: 600,
     height: 600,
     backgroundColor: '#ffffff',
     kiosk: true,

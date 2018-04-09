@@ -48,19 +48,9 @@ h3 {
     overflow: hidden;
 }
 
-/*@media screen and (max-width: 1000px) {
-  h1 {
-    font-size: 40px;  
-  }
-
-  h3 {
-    font-size: 30px;
-  }
-}*/
-
 @media screen and (max-width: 1400px) {
   h1 {
-    font-size: 25px;  
+    font-size: 25px;
   }
 
   h3 {
@@ -70,7 +60,7 @@ h3 {
 
 @media screen and (max-width: 1050px) {
   h1 {
-    font-size: 40px;  
+    font-size: 40px;
   }
 
   h3 {

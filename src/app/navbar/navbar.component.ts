@@ -6,8 +6,8 @@ import { ClockService } from "./clock.service";
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {  
-   time: Date;
+export class NavbarComponent {
+  time: Date;
 
   constructor(private clockService: ClockService) {
   }
