@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
+  templateUrl: './dashboard2.component.html',
+  styleUrls: ['./dashboard2.component.css'],
   animations: [
         trigger('allDone', [
             state('invisible', style({

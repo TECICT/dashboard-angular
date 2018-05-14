@@ -7,16 +7,12 @@ import { ListComponent } from './list.component';
 import { ListSettingsComponent } from './list-settings.component';
 import { AddListTypeComponent } from './add-list-type.component';
 import { ListService } from '../services';
-import { ListTypeComponent } from './list-type.component';
+import { MatCheckboxModule, MatInputModule } from '@angular/material';
 
 const appRoutes: ModuleWithProviders = RouterModule.forChild([
   {
     path: 'listsettings',
     component: ListSettingsComponent,
-  },
-  {
-    path: 'listtypes',
-    component: ListTypeComponent,
   },
   {
     path: 'addlisttype',
@@ -29,28 +25,27 @@ const appRoutes: ModuleWithProviders = RouterModule.forChild([
     ListComponent,
     ListSettingsComponent,
     AddListTypeComponent,
-    ListTypeComponent
   ],
   imports: [
     BrowserModule,
     appRoutes,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCheckboxModule,
+    MatInputModule
   ],
   exports: [
     ListComponent,
     ListSettingsComponent,
     AddListTypeComponent,
-    ListTypeComponent
   ],
   providers: [
     ListService
   ],
   bootstrap: [
-    ListComponent, 
+    ListComponent,
     ListSettingsComponent,
     AddListTypeComponent,
-    ListTypeComponent
   ]
 })
 export class ListModule { }

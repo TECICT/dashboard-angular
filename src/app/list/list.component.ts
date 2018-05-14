@@ -23,70 +23,100 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   ]
 })
 export class ListComponent implements OnInit{
-  @Input() include: string[] = ['acute', 'bench', 'jobOffer', 'starter', 'stopper'];
   @Output() listLoaded = new EventEmitter();
-  public possibilities = ['acute', 'bench', 'joboffer', 'starter', 'stopper'];
-  private listTimer;
+  @Input() include: string[] = ['acute', 'bench', 'jobOffer', 'starter', 'stopper'];
   private animationTimer;
-  public lists = {};
+  public lists: any = [{'listName': ''}];
   public currentItem = 0;
-  public state = 'clear';
+  public itemKeys = [];
+  public criticalIndex = -1;
+  public criticalType = 'no';
+  public state = 'faded';
+  public noData = false;
 
   constructor(
     private listService: ListService
   ) {}
 
   ngOnInit() {
-    this.checkInput(function(self) {
-      self.listTimer = Observable.timer(0, 5000);
-      self.listTimer.subscribe((t) => self.getAll());
-      if (self.include.length > 1) {
-        self.animationTimer = Observable.timer(0, 10000);
-        self.animationTimer.subscribe((t) => self.toggleState());
-      } else {
-        self.toggleState();
-      }
-    });
-  }
-
-  checkInput(cb) {
-    this.include.forEach(value => {
-      if (this.possibilities.indexOf(value.toLowerCase()) == -1) {
-        this.include.splice(this.include.indexOf(value, 1));
-      }
-    });
-    cb(this);
-    
+    this.getAll();
+    // this.listTimer = Observable.timer(0, 5000);
+    // this.listTimer.subscribe((t) => this.getAll());
+    this.animationTimer = Observable.timer(5000, 5000);
+    this.animationTimer.subscribe((t) => this.toggleState());
   }
 
   getAll() {
-    this.include.forEach(value => {
-      this.listService.get(value)
-      .subscribe(
-        data => {
-          this.lists[value] = data;
+    this.listService.getAllTypes()
+    .subscribe(
+      data => {
+        if (data.length == 0) {
+          this.noData = true;
+        } else {
+          this.lists = data;
+          console.log(this.lists);
+          this.setList();
         }
-      )
-    });
-    this.listLoaded.emit();
+        this.listLoaded.emit();
+      }
+    )
   }
 
-  getBackgroundcolor(criticalParameter) {
-    if (criticalParameter) {
-      return "#ff7272";
-    } else {
-      return "#c4ffcc";
+  setList() {
+    if (this.state == 'faded' && this.lists[0].labels) {
+      this.currentItem = this.checkValidItem(this.currentItem);
+      this.itemKeys = Object.keys(this.lists[this.currentItem].items[0]);
+      this.getCriticalIndex();
+      this.toggleState();
     }
   }
 
-  changeList() {
-    if (this.state == 'faded') {
-      if (this.currentItem >= this.include.length - 1) {
-        this.currentItem = 0;
-      } else {
-        this.currentItem += 1;
+  checkValidItem(current) {
+    current += 1;
+    if (current >= this.lists.length) {
+      current = 0;
+    }
+    if (this.lists[current].items.length == 0) {
+      current = this.checkValidItem(current);
+      return current;
+    } else {
+      return current;
+    }
+  }
+
+  getCriticalIndex() {
+    this.criticalIndex = -1;
+    this.criticalType = 'no';
+    this.lists[this.currentItem].labels.forEach(
+      (label, index) => {
+        if (label.critical == 'yes') {
+          this.criticalIndex = index;
+          this.criticalType = 'yes';
+        } else if (label.critical == 'reverse') {
+          this.criticalIndex = index;
+          this.criticalType = 'reverse';
+        }
       }
-      this.toggleState();
+    )
+  }
+
+  getBackgroundcolor(item) {
+    if (this.criticalIndex == -1) {
+      return "#FFFFFF";
+    } else {
+      if (this.lists[this.currentItem].labels[this.criticalIndex].critical == 'yes') {
+        if (item[this.itemKeys[this.criticalIndex]]) {
+          return "#63D668";
+        } else {
+          return "#F23C32";
+        }
+      } else if (this.lists[this.currentItem].labels[this.criticalIndex].critical == 'reverse') {
+        if (item[this.itemKeys[this.criticalIndex]] == false) {
+          return "#63D668";
+        } else {
+          return "#F23C32";
+        }
+      }
     }
   }
 

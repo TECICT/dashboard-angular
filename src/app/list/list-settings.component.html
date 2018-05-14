@@ -1,94 +1,49 @@
-<!-- <h3>Acute lijst</h3>
+<div class="container-fluid">
+    <div *ngFor="let list of allLists">
+        <h3>{{ list.listName }}</h3>
+        <button type="button" class="btn tecbtn-reverse" (click)="delete(list.listName)">Remove list</button>
+        <br>
+        <br>
+        <table>
+            <thead>
+            <tr>
+                <th *ngFor="let label of list.labels" (click)="setCritical(list, label)" [style.background-color]="getBackgroundColor(label)">{{label.key}}</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of list.items">
+                    <td *ngFor="let label of list.labels">
+                        <div *ngIf="label.type == 'checkbox'">
+                            <i class="fa fa-check" *ngIf="item[label.key]"></i>
+                            <i class="fa fa-times" *ngIf="!item[label.key]"></i>
+                        </div>
+                        <div *ngIf="label.type !== 'checkbox'">
+                            {{item[label.key]}}
+                        </div>
+                    </td>
+                    <td> <button type="button" class="btn tecbtn" (click)="deleteItem(item, list.listName)">X</button> </td>
+                </tr>
+                <tr>
+                    <td *ngFor="let label of list.labels">
+                        <input
+                        *ngIf="label.type != 'checkbox'"
+                        placeholder="{{label.key}}"
+                        class="form-control form-control-lg"
+                        [(ngModel)]="newItems[list.listName][label.key]"
+                        type="{{label.type}}"/>
+                        <mat-checkbox
+                        *ngIf="label.type == 'checkbox'"
+                        [(ngModel)]="newItems[list.listName][label.key]"
+                        checked=false
+                        ></mat-checkbox>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success" (click)="save(list.listName)">save</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-<form [formGroup]="acuteForm" (ngSubmit)="makeUser('acute', acuteForm.value)" >
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Voornaam</th>
-            <th>Achternaam</th>
-            <th>Functie</th>
-            <th>Beschikbaarheid</th>
-            <th>Zelfstandige?</th>
-            <th>Account manager</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let user of lists.acute">
-            <td>{{ user.firstName }}</td>
-            <td>{{ user.lastName }}</td>
-            <td>{{ user.function }}</td>
-            <td>{{ user.availability }}</td>
-            <td>{{ !user.payroll }}</td>
-            <td>{{ user.accountManager }}</td>
-            <td> <button type="button" class="btn tecbtn" (click)="delete('acute', user)">X</button> </td>
-        </tr>
-        <tr>
-            <td>
-                <input
-                placeholder="First name"
-                class="form-control form-control-lg"
-                [(ngModel)]="newAcute.firstName"
-                formControlName="firstName"
-                type="text"/>
-                <div class="text-danger" *ngIf="!acuteForm.controls['firstName'].valid && acuteForm.controls['firstName'].touched ">
-                    {{ titleAlert }}
-                </div>
-            </td>
-            <td>
-                <input
-                placeholder="Last name"
-                class="form-control form-control-lg"
-                [(ngModel)]="newAcute.lastName"
-                formControlName="lastName"
-                type="text"/>
-                <div class="text-danger" *ngIf="!acuteForm.controls['lastName'].valid && acuteForm.controls['lastName'].touched ">
-                    {{ titleAlert }}
-                </div>
-            </td>
-            <td>
-                <input
-                placeholder="Functie"
-                class="form-control form-control-lg"
-                [(ngModel)]="newAcute.function"
-                formControlName="function"
-                type="text"/>
-                <div class="text-danger" *ngIf="!acuteForm.controls['function'].valid && acuteForm.controls['function'].touched ">
-                    {{ titleAlert }}
-                </div>
-            </td>
-            <td>
-                <input
-                placeholder="Beschikbaarheid"
-                class="form-control form-control-lg"
-                [(ngModel)]="newAcute.availability"
-                formControlName="availability"
-                type="text"/>
-                <div class="text-danger" *ngIf="!acuteForm.controls['availability'].valid && acuteForm.controls['availability'].touched ">
-                    {{ titleAlert }}
-                </div>
-            </td>
-            <td>
-                <input
-                type="checkbox"
-                [(ngModel)]="newAcute.payroll"
-                formControlName="payroll"
-                name="payroll"
-                />
-            </td>
-            <td>
-                <input
-                placeholder="Account manager"
-                class="form-control form-control-lg"
-                [(ngModel)]="newAcute.accountManager"
-                formControlName="accountManager"
-                type="text"/>
-                <div class="text-danger" *ngIf="!acuteForm.controls['accountManager'].valid && acuteForm.controls['accountManager'].touched ">
-                    {{ titleAlert }}
-                </div>
-            </td>
-            <td> <button class="btn" type="submit" [disabled]="!acuteForm.valid">Create</button> </td>
-        </tr>
-        </tbody>
-    </table>
-</form> -->
+</div>

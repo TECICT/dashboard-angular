@@ -3,3 +3,24 @@ h1 {
     padding-left: 15px;
 }
 
+
+tr {
+  border-left: solid 10px white;
+}
+
+table, th, td {
+  border-top: 1px solid #DDDDDD;
+  border-bottom: 1px solid #DDDDDD;
+}
+
+table {
+  width: 98%;
+}
+
+th {
+    height: 50px;
+}
+
+td {
+  height: 40px;
+}

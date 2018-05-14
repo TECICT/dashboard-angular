@@ -2,6 +2,19 @@ a {
     color: #f13b00;
 }
 
+table, th, td {
+    border-top: 1px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    height: 50px;
+}
+
 h3 {
     color: #003443;
 }
@@ -95,7 +108,8 @@ a:hover {
 }
 
 .tecbtn-reverse {
-    color: #003443;
+    background-color: #003443;
+    color: white;
     cursor: pointer;
 }
 
