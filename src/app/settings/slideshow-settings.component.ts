@@ -33,7 +33,6 @@ export class SlideshowSettingsComponent implements AfterViewInit, OnInit {
     }
 
     onFileSelected(input) {
-        
         if (this.uploader.queue.length > 1) {
             this.uploader.queue[0].remove();
         }

@@ -25,10 +25,10 @@ import { NewsService } from '../services';
     ]
 })
 export class NewsComponent implements OnInit {
-    @Output() newsLoaded = new EventEmitter();
+    @Output() newsLoaded = new EventEmitter<boolean>();
     data: any;
     titles: string[] = [];
-    titleNow = '';
+    titleNow: string = '';
     descriptionNow = '';
     descriptions: string[] = [];
     private animationTimer;
@@ -37,7 +37,7 @@ export class NewsComponent implements OnInit {
 
     public state = 'full';
 
-    constructor(private newsService: NewsService) {    
+    constructor(private newsService: NewsService) {
     }
 
     ngOnInit() {
@@ -53,11 +53,21 @@ export class NewsComponent implements OnInit {
         this.newsService.get()
         .subscribe(
             data => {
-              this.data = data;
-              this.parseData(this.data);
+                this.data = data;
+                if (this.data.error) {
+                    if (this.titleNow == '') this.errorMessage();
+                    this.newsLoaded.emit(true);
+                    this.getNews();
+                } else {
+                    this.parseData(this.data);
+                }
             },
             error => {
-              console.log('error getting the news');
+                if (!this.titleNow) {
+                    this.errorMessage();
+                }
+                this.newsLoaded.emit(true);
+                this.getNews();
             }
         );
     }
@@ -70,7 +80,14 @@ export class NewsComponent implements OnInit {
         }
         this.titleNow = this.titles[0];
         this.descriptionNow = this.descriptions[0];
-        this.newsLoaded.emit();
+        this.newsLoaded.emit(true);
+    }
+
+    errorMessage() {
+        this.titles = ['News server is not available'];
+        this.descriptions = ['No news'];
+        this.titleNow = this.titles[0];
+        this.descriptionNow = this.descriptions[0];
     }
 
     toggleState() {
@@ -79,7 +96,7 @@ export class NewsComponent implements OnInit {
 
     setNewItem() {
         if (this.state == 'middle') {
-            if (this.counter >= 10) {
+            if (this.counter >= this.titles.length) {
                 this.counter = 0;
             }
             this.titleNow = this.titles[this.counter];

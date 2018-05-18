@@ -1,9 +1,9 @@
-<router-outlet *ngIf="online"></router-outlet>
-<div *ngIf="!online" class="row">
-    <div class="col-md-12">
-        <br>
-        <h2>There is no internet connectivity. The app will be back once the browser is back online</h2>
+<div class="wrapper">
+    <router-outlet *ngIf="online"></router-outlet>
+    <div *ngIf="!online" class="row">
+        <div class="col-md-12">
+            <br>
+            <h2>There is no internet connectivity. The app will be back once the browser is back online</h2>
+        </div>
     </div>
 </div>
-
-<!-- <img *ngIf="!online" [src]="src" alt="There is not internet connectivity. The app will be back once the app is back online"> -->

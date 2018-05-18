@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { Ng2MapComponent } from 'ng2-map';
 import { Observable } from 'rxjs';
 
 import { SettingsService } from '../services';
@@ -11,7 +10,7 @@ import { SettingsService } from '../services';
   styleUrls: ['./maps.component.css']
 })
 export class MapsComponent implements OnInit{
-  @Output() mapsLoaded = new EventEmitter();
+  @Output() mapsLoaded = new EventEmitter<boolean>();
   location: string = 'Grimbergen, Brussel';
   private mapsTimer;
 
@@ -24,12 +23,19 @@ export class MapsComponent implements OnInit{
 
   getLocation() {
     this.settingsService.get()
-    .subscribe(settings => {
-      this.location = settings.location_maps;
-    });
+    .subscribe(
+      settings => {
+        this.location = settings.location_maps;
+      },
+      error => {
+        this.getLocation();
+      }
+    );
   }
 
   onMapReady(map) {
-    this.mapsLoaded.emit();
+    console.log('map ready');
+    console.log(map);
+    this.mapsLoaded.emit(true);
   }
 }

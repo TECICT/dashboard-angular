@@ -10,7 +10,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   animations: [
       trigger('newLinkedinItem', [
           state('middle', style({
-              opacity: 0
+              opacity: 0,
           })),
           state('full' , style({
               opacity: 1
@@ -22,7 +22,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   ]
 })
 export class LinkedinPostsComponent {
-  @Output() linkedinLoaded = new EventEmitter();
+  @Output() linkedinLoaded = new EventEmitter<boolean>();
   public isUserAuthenticated;
   private apiKey;
   posts: string[] = [];
@@ -30,6 +30,7 @@ export class LinkedinPostsComponent {
   postNow: string = '';
   imageNow: string = '';
   imageNowPreload: string = '';
+  linkedinError: boolean = false;
   showlogin: Boolean = true;
   private animationTimer;
   private linkedinTimer;
@@ -76,7 +77,7 @@ export class LinkedinPostsComponent {
   public subscribeToLogout(){
     this._linkedInService.logout().subscribe({
       next: () => {
-        // does not emit a value 
+        // does not emit a value
       },
       complete: () => {
         console.log('linkedin logged out');
@@ -103,12 +104,17 @@ export class LinkedinPostsComponent {
       .asObservable()
       .subscribe({
         next: (data) => {
-          console.log(data);
+          this.linkedinError = false;
           this.parseData(data);
         },
         error: (err) => {
-          console.log('error');
-          console.log(err);
+          if (this.postNow) {
+            this.rawApiCall();
+            this.linkedinLoaded.emit(true);
+          } else {
+            this.linkedinError = true;
+            this.linkedinLoaded.emit(true);
+          }
         },
         complete: () => {
           console.log('RAW API call completed');
@@ -127,26 +133,25 @@ export class LinkedinPostsComponent {
             this.posts[i] = data.values[i].updateContent.companyStatusUpdate.share.comment;
             if ('content' in data.values[i].updateContent.companyStatusUpdate.share) {
               this.postImages[i] = data.values[i].updateContent.companyStatusUpdate.share.content.submittedImageUrl;
-              if (this.posts[i].length > 140) {
-                var substr1 = this.posts[i].substring(0,140);
-                var substr2 = this.posts[i].substring(141);
-                this.posts[i] = substr1 + substr2.substring(0, substr2.indexOf(' ')) + "... Read more at linkedin.com/company/44163";
+              if (this.posts[i].length > 200) {
+                var substr1 = this.posts[i].substring(0,200);
+                var substr2 = this.posts[i].substring(201);
+                this.posts[i] = substr1 + substr2.substring(0, substr2.indexOf('.') < substr2.indexOf('!')? substr2.indexOf('.'): substr2.indexOf('!')) + "... Read more at linkedin.com/company/44163";
               }
             } else {
               this.postImages[i] = '';
-              if (this.posts[i].length > 800) {
-                this.posts[i] = this.posts[i].substring(0,900) + "...";
+              if (this.posts[i].length > 1000) {
+                this.posts[i] = this.posts[i].substring(0,1000) + "...";
               }
             }
         } else if ('companyJobUpdate' in data.values[i].updateContent) {
             this.posts[i] = 'Vacature: ' + data.values[i].updateContent.companyJobUpdate.job.position.title;
             this.postImages[i] = '../../assets/job-offer.jpg';
         }
-        
     }
     this.postNow = this.posts[0];
     this.imageNowPreload = this.postImages[0];
-    this.linkedinLoaded.emit();
+    this.linkedinLoaded.emit(true);
 
   }
 
@@ -176,7 +181,7 @@ export class LinkedinPostsComponent {
     }
   }
 
-  imageLoaded() {
+  imageLoaded(evt) {
     this.toggleState();
   }
 }

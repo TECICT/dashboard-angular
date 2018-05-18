@@ -12,29 +12,35 @@ import { SettingsService } from '../services';
   styleUrls: ['./slideshow.component.css']
 })
 export class SlideshowComponent implements OnInit{
-  @Output() slideshowLoaded = new EventEmitter();
+  @Output() slideshowLoaded = new EventEmitter<boolean>();
   src: String = "";
   private slideshowTimer;
+  serverOnline: boolean = true;
 
   constructor(private settingsService: SettingsService) {}
 
   ngOnInit() {
       // this.src = environment.api_url + '/video';
-      
       this.slideshowTimer = Observable.timer(0, 10000);
       this.slideshowTimer.subscribe((t) => this.changeSource());
   }
 
   changeSource() {
       this.settingsService.get()
-      .subscribe(settings => {
-        if (this.src !== environment.api_url + '/video/' + settings.video.split('/').pop()) {
-          console.log('video change');
-          console.log(environment.api_url + '/video/' + settings.video.split('/').pop());
-          this.src = environment.api_url + '/video/' + settings.video.split('/').pop();
-          this.loadVideo();
+      .subscribe(
+        settings => {
+          if (!this.serverOnline || this.src !== environment.api_url + '/video/' + settings.video.split('/').pop()) {
+            this.serverOnline = true;
+            this.src = environment.api_url + '/video/' + settings.video.split('/').pop();
+            this.loadVideo();
+          }
+        },
+        error => {
+          this.serverOnline = false;
+          this.slideshowLoaded.emit(true);
+          this.changeSource();
         }
-      });
+      );
   }
 
   loadVideo() {
@@ -43,7 +49,7 @@ export class SlideshowComponent implements OnInit{
       var video = <HTMLVideoElement> videoHTML;
       video = videoHTML as HTMLVideoElement;
       video.load();
-      this.slideshowLoaded.emit();
+      this.slideshowLoaded.emit(true);
   }
 
 }

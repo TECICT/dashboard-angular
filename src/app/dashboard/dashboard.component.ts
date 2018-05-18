@@ -21,11 +21,11 @@ import { Observable } from 'rxjs';
     ]
 })
 export class DashboardComponent {
-    weatherDone: boolean = false;
-    slideshowDone: boolean = false;
-    linkedinDone: boolean = false;
-    mapsDone: boolean = false;
-    newsDone: boolean = false;
+    weatherState = "invisible";
+    slideshowState = "invisible";
+    linkedinState = "invisible";
+    mapsState = "invisible";
+    newsState = "invisible";
     allDone: boolean = false;
     errors = [];
     finishedTimer;
@@ -36,80 +36,58 @@ export class DashboardComponent {
     stateLoading = "visible";
 
     ngOnInit() {
-        this.finishedTimer = Observable.timer(10000, 10000)
+        this.finishedTimer = Observable.timer(600000, 600000)
         this.finishedTimer.subscribe((t) => this.checkErrors());
         // this.refreshTimer = Observable.timer(60000, 60000)
         // this.refreshTimer.subscribe((t) => this.checkRefresh());
     }
 
-    finishWeather() {
-        this.weatherDone = true;
-        this.removeError('weather');
+    finishWeather(evt) {
+        if (evt) this.weatherState = "visible";
+        else this.weatherState = "invisible";
         this.checkAllDone();
     }
 
-    finishSlideshow() {
-        this.slideshowDone = true;
-        this.removeError('slideshow');
+    finishSlideshow(evt) {
+        if (evt) this.slideshowState = "visible";
+        else this.slideshowState = "invisible";
         this.checkAllDone();
     }
 
-    finishLinkedin() {
-        this.linkedinDone = true;
-        this.removeError('linkedin');
+    finishLinkedin(evt) {
+        if (evt) this.linkedinState = "visible";
+        else this.linkedinState = "invisible";
         this.checkAllDone();
     }
 
-    finishMaps() {
-        this.mapsDone = true;
-        this.removeError('maps');
+    finishMaps(evt) {
+        if (evt) this.mapsState = "visible";
+        else this.mapsState = "invisible";
         this.checkAllDone();
     }
 
-    finishNews() {
-        this.newsDone = true;
-        this.removeError('news');
+    finishNews(evt) {
+        if (evt) this.newsState = "visible";
+        else this.newsState = "invisible";
         this.checkAllDone();
     }
 
     checkAllDone() {
-        if (this.weatherDone && this.slideshowDone && this.mapsDone && this.newsDone) {
+        this.stateLoading = "invisible";
+        if (this.weatherState == 'visible' &&
+            this.slideshowState == 'visible' &&
+            this.linkedinState == 'visible' &&
+            this.mapsState == 'visible' &&
+            this.newsState == 'visible') {
             this.allDone = true;
-            this.state = 'visible';
-            this.stateLoading = 'invisible'
+        } else {
+            this.allDone = false
         }
     }
 
     checkErrors() {
         if (!this.allDone) {
-            if (!this.weatherDone && this.errors.indexOf('weather') == -1) {
-                this.errors.push('weather');
-            }
-            if (!this.slideshowDone && this.errors.indexOf('slideshow') == -1) {
-                this.errors.push('slideshow');
-            }
-            if (!this.linkedinDone && this.errors.indexOf('linkedin') == -1) {
-                this.errors.push('linkedin');
-            }
-            if (!this.mapsDone && this.errors.indexOf('maps') == -1) {
-                this.errors.push('maps');
-            }
-            if (!this.newsDone && this.errors.indexOf('news') == -1) {
-                this.errors.push('news');
-            }
-            console.log(this.errors);
+            window.location.reload();
         }
     }
-
-    removeError(type) {
-        if (this.errors.indexOf(type) !== -1) {
-            this.errors.splice(this.errors.indexOf(type), 1);
-        }
-    }
-
-    // checkRefresh() {
-    //     if (!this.allDone) {
-    //         window.location.reload();
-    //     }
-    // }
 }
