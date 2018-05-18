@@ -21,7 +21,6 @@ export class SlideshowComponent implements OnInit{
 
   ngOnInit() {
       // this.src = environment.api_url + '/video';
-      
       this.slideshowTimer = Observable.timer(0, 10000);
       this.slideshowTimer.subscribe((t) => this.changeSource());
   }

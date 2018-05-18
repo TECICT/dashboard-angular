@@ -45,7 +45,6 @@ export class WeatherComponent implements OnInit {
             if (this.weather.name == '') this.weather.name = 'Unavailable';
             this.weatherLoaded.emit(true);
             setTimeout(() => this.getWeather(), 2000);
-            
           }
         );
       },
@@ -55,7 +54,6 @@ export class WeatherComponent implements OnInit {
         setTimeout(() => this.getWeather(), 2000);
       }
     );
-    
   }
 
   translateIcon(code) {

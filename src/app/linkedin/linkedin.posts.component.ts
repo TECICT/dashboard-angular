@@ -30,6 +30,7 @@ export class LinkedinPostsComponent {
   postNow: string = '';
   imageNow: string = '';
   imageNowPreload: string = '';
+  linkedinError: boolean = false;
   showlogin: Boolean = true;
   private animationTimer;
   private linkedinTimer;
@@ -76,7 +77,7 @@ export class LinkedinPostsComponent {
   public subscribeToLogout(){
     this._linkedInService.logout().subscribe({
       next: () => {
-        // does not emit a value 
+        // does not emit a value
       },
       complete: () => {
         console.log('linkedin logged out');
@@ -103,11 +104,17 @@ export class LinkedinPostsComponent {
       .asObservable()
       .subscribe({
         next: (data) => {
+          this.linkedinError = false;
           this.parseData(data);
         },
         error: (err) => {
-          console.log(err);
-          this.linkedinLoaded.emit(false);
+          if (this.postNow) {
+            this.rawApiCall();
+            this.linkedinLoaded.emit(true);
+          } else {
+            this.linkedinError = true;
+            this.linkedinLoaded.emit(true);
+          }
         },
         complete: () => {
           console.log('RAW API call completed');
@@ -141,7 +148,6 @@ export class LinkedinPostsComponent {
             this.posts[i] = 'Vacature: ' + data.values[i].updateContent.companyJobUpdate.job.position.title;
             this.postImages[i] = '../../assets/job-offer.jpg';
         }
-        
     }
     this.postNow = this.posts[0];
     this.imageNowPreload = this.postImages[0];

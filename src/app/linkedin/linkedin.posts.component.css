@@ -33,6 +33,15 @@
     padding-right: 15px;
 }
 
+.errorimage {
+    height: 100%;
+    width: 95%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("../../assets/LinkedIn_DOWN.png");
+}
+
 .postimagediv {
     flex: 1;
     height: 100%;

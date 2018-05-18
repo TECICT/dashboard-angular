@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { MapsComponent } from './maps.component';
-import { Ng2MapModule } from 'ng2-map';
+// import { Ng2MapModule } from 'ng2-map';
+import { NguiMapModule} from '@ngui/map';
 
 @NgModule({
   declarations: [
@@ -10,9 +11,10 @@ import { Ng2MapModule } from 'ng2-map';
   ],
   imports: [
     BrowserModule,
-    Ng2MapModule.forRoot({
-      apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBy560YsZb8wS98s7BX9hAbDHgANkflQ2U'
-    })
+    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBy560YsZb8wS98s7BX9hAbDHgANkflQ2U'})
+    // Ng2MapModule.forRoot({
+    //   apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBy560YsZb8wS98s7BX9hAbDHgANkflQ2U'
+    // })
   ],
   exports: [
     MapsComponent

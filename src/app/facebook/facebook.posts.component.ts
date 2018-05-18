@@ -7,7 +7,7 @@ import { FacebookService, InitParams, AuthResponse, LoginResponse, UIResponse, U
   styleUrls: ['./facebook.posts.component.css']
 })
 export class FacebookPostsComponent {
-  
+
   postlink = '';
 
   constructor(private fb: FacebookService) {
@@ -18,7 +18,6 @@ export class FacebookPostsComponent {
     };
 
     this.fb.init(params);
-    
   }
 
   ngOnInit() {

@@ -11,7 +11,7 @@ export class WeatherService {
   private city = 'brussel';
 
   //constructor(@Inject(APP_CONFIG) private config: IAppConfig, private http: Http) { }
-  
+
   constructor(private apiService: ApiService ) {}
 
   get(city): Observable<any> {
