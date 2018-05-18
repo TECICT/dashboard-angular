@@ -9,7 +9,6 @@
 video {
     /* autoprefixer: off */
     grid-column: 1;
-    /* autoprefixer: off */
     grid-row: 1;
     height: 100%;
     width: 100%;
@@ -28,7 +27,6 @@ video_poster {
 img {
     /* autoprefixer: off */
     grid-column: 1;
-    /* autoprefixer: off */
     grid-row: 1;
     height: 100%;
     width: auto;

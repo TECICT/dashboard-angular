@@ -8,7 +8,7 @@ import { ApiService } from './api.service';
 
 @Injectable()
 export class NewsService {
-  
+
   constructor(private apiService: ApiService ) {}
 
   get(): Observable<any> {

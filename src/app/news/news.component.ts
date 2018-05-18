@@ -37,7 +37,7 @@ export class NewsComponent implements OnInit {
 
     public state = 'full';
 
-    constructor(private newsService: NewsService) {    
+    constructor(private newsService: NewsService) {
     }
 
     ngOnInit() {
