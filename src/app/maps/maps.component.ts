@@ -1,6 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { Ng2MapComponent } from 'ng2-map';
 import { Observable } from 'rxjs';
 
 import { SettingsService } from '../services';
