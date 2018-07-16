@@ -57,10 +57,11 @@ export class ListSettingsComponent implements OnInit{
     }
   }
 
-  delete(listName) {
+  deleteList(listName) {
     this.listService.deleteType(listName)
     .subscribe(
       data => {
+        console.log("list deleted");
         this.getAll();
       }
     )

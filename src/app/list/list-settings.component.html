@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div *ngFor="let list of allLists">
         <h3>{{ list.listName }}</h3>
-        <button type="button" class="btn tecbtn-reverse" (click)="delete(list.listName)">Remove list</button>
+        <button type="button" class="btn tecbtn-reverse" (click)="deleteList(list.listName)">Remove list</button>
         <br>
         <br>
         <table>
