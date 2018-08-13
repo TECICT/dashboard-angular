@@ -103,7 +103,8 @@ user-settings {
 }
 
 .tecbtn-reverse {
-    color: #003443;
+    background-color: #003443;
+    color: white;
     cursor: pointer;
 }
 

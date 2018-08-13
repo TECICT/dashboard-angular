@@ -2,6 +2,9 @@
     <div class="row">
         <h1><a routerLink="/">settings</a></h1>
     </div>
+    <div class="row">
+        <button type="button" class="btn btn-lg tecbtn-reverse" [routerLink]="['/']"><i class="fa fa-home"></i></button>
+    </div>
     <div *showAuthed="true" class="row">
         <div *ngIf="!hasPermission" class="col-md-12">
             <span>It seems like you don't have the right permissions to change the dashboard settings. Please contact your supervisor to get the correct access rights or go back to the <a routerLink="/">home page</a>.</span>
