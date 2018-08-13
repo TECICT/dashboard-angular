@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'dashboard',
@@ -34,6 +35,10 @@ export class DashboardComponent {
 
     state = "invisible";
     stateLoading = "visible";
+
+    constructor(
+        private router: Router
+    ) {}
 
     ngOnInit() {
         this.finishedTimer = Observable.timer(600000, 600000)
@@ -89,5 +94,9 @@ export class DashboardComponent {
         if (!this.allDone) {
             window.location.reload();
         }
+    }
+
+    changeroute(link) {
+        this.router.navigateByUrl("/" + link);
     }
 }

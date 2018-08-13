@@ -7,11 +7,14 @@
   </div>
   <img src="assets/loading.gif" alt="" class="loading" [@allDone]="stateLoading">
   <div class="wrapper" >
-    <slideshow (slideshowLoaded)="finishSlideshow($event)" [@allDone]="slideshowState"></slideshow>
+    <slideshow (slideshowLoaded)="finishSlideshow($event)" [@allDone]="slideshowState" (dblclick)="changeroute('settings')"></slideshow>
     <weather (weatherLoaded)="finishWeather($event)" [@allDone]="weatherState"></weather>
-    <news (newsLoaded)="finishNews($event)" [@allDone]="newsState"></news>
-    <list *ngIf="refresh" routerLink="/listsettings" ></list>
+    <!-- <news (newsLoaded)="finishNews($event)" [@allDone]="newsState"></news> -->
+    <list exclude="['Vacatures', 'Bank']" *ngIf="refresh" (dblclick)="changeroute('listsettings')" ></list>
+    <!-- <list *ngIf="refresh" (dblclick)="changeroute('listsettings')" ></list> -->
     <maps (mapsLoaded)="finishMaps($event)" [@allDone]="mapsState"></maps>
+    <list-highlighter class="highlighter1" listName="bank" (dblclick)="changeroute('listsettings')"></list-highlighter>
+    <list-highlighter class="highlighter2" stylePreset="dark" listName="vacatures" (dblclick)="changeroute('listsettings')"></list-highlighter>
   </div>
 </div>
 
