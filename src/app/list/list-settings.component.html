@@ -1,32 +1,104 @@
 <!-- test -->
-<div class="container-fluid">
-    <div *ngFor="let list of allLists">
-        <h3>{{ list.listName }}</h3>
-        <button type="button" class="btn tecbtn-reverse" (click)="deleteList(list.listName)">Remove list</button>
-        <br>
-        <br>
-        <table>
-            <thead>
-            <tr>
-                <th *ngFor="let label of list.labels" (click)="setCritical(list, label)" [style.background-color]="getBackgroundColor(label)">{{label.key}}</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of list.items">
-                    <td *ngFor="let label of list.labels">
-                        <div *ngIf="label.type == 'checkbox'">
-                            <i class="fa fa-check" *ngIf="item[label.key]"></i>
-                            <i class="fa fa-times" *ngIf="!item[label.key]"></i>
+<div class="container-fluid hidden-md-down">
+    <div class="row">
+        <h1 class="col-12">All lists</h1>
+    </div>
+    <div *showAuthed="true" class="row">
+        <div *ngIf="!hasPermission" class="col-md-12">
+            <span>It seems like you don't have the right permissions to change the dashboard settings. Please contact your supervisor to get the correct access rights or go back to the <a routerLink="/">home page</a>.</span>
+        </div>
+        <div *ngIf="hasPermission">
+            <div class="row">
+                <div class="col-12">
+                    <button type="button" class="btn tecbtn-reverse" [routerLink]="['/']"><i class="fa fa-home"></i></button>
+                    <button type="button" class="btn tecbtn" routerLink="/addlisttype">Add a new list</button>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <div *ngFor="let list of allLists" class="col-12 panel">
+                    <div class="row justify-content-between">
+                        <div class="col-xl-4 col-lg-4">
+                            <h3>{{ list.listName }}</h3>
                         </div>
-                        <div *ngIf="label.type !== 'checkbox'">
-                            {{item[label.key]}}
+                        <div class="col-xl-4 col-lg-4">
+                            <div class="pull-right">
+                                <button type="button" class="btn tecbtn-reverse" routerLink="/addlisttype" [queryParams]="{id: list._id}">Edit list</button>
+                                <button type="button" class="btn tecbtn" (click)="deleteList(list._id)">Remove list</button>
+                            </div>
                         </div>
-                    </td>
-                    <td> <button type="button" class="btn tecbtn" (click)="deleteItem(item, list.listName)">X</button> </td>
-                </tr>
-                <tr>
-                    <td *ngFor="let label of list.labels">
+                    </div>
+                    <br>
+                    <br>
+                    <div class="d-none d-md-block">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th *ngFor="let label of list.labels" (click)="setCritical(list, label)" [style.background-color]="getBackgroundColor(label)">{{label.key}}</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr  *ngFor="let item of list.items">
+                                    <ng-container *ngIf="!item.editing">
+                                        <td *ngFor="let label of list.labels">
+                                            <div *ngIf="label.type == 'checkbox'">
+                                                <i class="fa fa-check" *ngIf="item[label.key]"></i>
+                                                <i class="fa fa-times" *ngIf="!item[label.key]"></i>
+                                            </div>
+                                            <div *ngIf="label.type !== 'checkbox'" class="tdbox">
+                                                {{item[label.key]}}
+                                            </div>
+                                        </td>
+                                    </ng-container>
+                                    <ng-container *ngIf="item.editing">
+                                        <td *ngFor="let label of list.labels">
+                                            <div *ngIf="label.type == 'checkbox'">
+                                                <mat-checkbox
+                                                [(ngModel)]="item[label.key]"
+                                                ></mat-checkbox>
+                                            </div>
+                                            <div *ngIf="label.type !== 'checkbox'">
+                                                <input
+                                                class="existingInput"
+                                                [(ngModel)]="item[label.key]"
+                                                type="{{item[label.type]}}"/>
+                                            </div>
+                                        </td>
+                                    </ng-container>
+                                    <td *ngIf="!item.editing" class="last-col">
+                                        <button type="button" class="btn tecbtn-reverse" (click)="item.editing = !item.editing"><i class="fa fa-pencil"></i></button>
+                                        <button type="button" class="btn tecbtn" (click)="deleteItem(item, list.listName, list._id)"><i class="fa fa-trash"></i></button>
+                                    </td>
+                                    <td *ngIf="item.editing" class="last-col">
+                                        <button type="button" class="btn btn-success" (click)="saveExisting(list.listName, list._id)"><i class="fa fa-check"></i></button>
+                                        <button type="button" class="btn tecbtn" (click)="item.editing = !item.editing"><i class="fa fa-times"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td *ngFor="let label of list.labels">
+                                        <mat-form-field *ngIf="label.type != 'checkbox'">
+                                            <input matInput
+                                            [(ngModel)]="newItems[list.listName][label.key]"
+                                            type="{{label.type}}"/>
+                                        </mat-form-field>
+                                        <mat-checkbox
+                                        *ngIf="label.type == 'checkbox'"
+                                        [(ngModel)]="newItems[list.listName][label.key]"
+                                        checked=false
+                                        ></mat-checkbox>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-success" (click)="save(list.listName, list._id)">Save</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div *ngFor="let label of list.labels" class="d-md-none">
+                        <h5><label>{{label.key}}</label></h5>
                         <input
                         *ngIf="label.type != 'checkbox'"
                         placeholder="{{label.key}}"
@@ -38,13 +110,20 @@
                         [(ngModel)]="newItems[list.listName][label.key]"
                         checked=false
                         ></mat-checkbox>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-success" (click)="save(list.listName)">save</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                        <br>
+                    </div>
+                    <br>
+                    <div>
+                        <button type="button" class="d-md-none btn btn-success" (click)="save(list.listName, list._id)">save</button>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
+    <div *showAuthed="false" class="row">
+        <div class="col-md-12">
+            <h3>You can not change the settings when you are not logged in... Please click <a routerLink="/login">here</a> to login or go back to the <a routerLink="/">home page</a></h3>
+        </div>
+    </div>
 </div>

@@ -2,12 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { ErrorModule } from '../errors/error.module';
 
 import { ListComponent } from './list.component';
 import { ListSettingsComponent } from './list-settings.component';
+import { ListHighlighterComponent } from './list-highlighter.component';
 import { AddListTypeComponent } from './add-list-type.component';
 import { ListService } from '../services';
-import { MatCheckboxModule, MatInputModule } from '@angular/material';
+import { MatCheckboxModule, MatInputModule, MatButtonModule, MatSelectModule } from '@angular/material';
 
 const appRoutes: ModuleWithProviders = RouterModule.forChild([
   {
@@ -17,6 +19,10 @@ const appRoutes: ModuleWithProviders = RouterModule.forChild([
   {
     path: 'addlisttype',
     component: AddListTypeComponent,
+  },
+  {
+    path: 'addlisttype/:id',
+    component: AddListTypeComponent,
   }
 ]);
 
@@ -25,6 +31,7 @@ const appRoutes: ModuleWithProviders = RouterModule.forChild([
     ListComponent,
     ListSettingsComponent,
     AddListTypeComponent,
+    ListHighlighterComponent
   ],
   imports: [
     BrowserModule,
@@ -32,12 +39,16 @@ const appRoutes: ModuleWithProviders = RouterModule.forChild([
     FormsModule,
     ReactiveFormsModule,
     MatCheckboxModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    ErrorModule
   ],
   exports: [
     ListComponent,
     ListSettingsComponent,
     AddListTypeComponent,
+    ListHighlighterComponent,
   ],
   providers: [
     ListService
@@ -46,6 +57,7 @@ const appRoutes: ModuleWithProviders = RouterModule.forChild([
     ListComponent,
     ListSettingsComponent,
     AddListTypeComponent,
+    ListHighlighterComponent,
   ]
 })
 export class ListModule { }

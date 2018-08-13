@@ -1,0 +1,26 @@
+<div class="list-highlighter {{stylePreset}}" *ngIf="!noData">
+  <h1 *ngIf="errorMsg">{{errorMsg}}</h1>
+  <div *ngIf="!errorMsg" class="row">
+    <div class="col-2">
+      <h1>{{list.listName}}</h1>
+    </div>
+    <div class="listItem col-10" [@newItem]="state" (@newItem.done)="setList()">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col" *ngFor="let label of list.labels">
+              {{label.key}}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td *ngFor="let label of list.labels">
+              <span>{{list.items[currentItem][label.key]}}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

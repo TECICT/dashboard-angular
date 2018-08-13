@@ -1,18 +1,22 @@
-<div class="list" [@newList]="state" (@newList.done)="setList()">
+<div class="list" [@newList]="state" (@newList.done)="setList()" *ngIf="!noData">
   <div>
     <h1>{{lists[currentItem].listName}}</h1>
     <table>
       <thead>
         <tr>
+          <th *ngIf="criticalIndex != -1">label</th>
           <th scope="col" *ngFor="let label of lists[currentItem].labels">
             {{label.key}}
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of lists[currentItem].items" [style.border-color]="getBackgroundcolor(item)">
-          <td *ngFor="let key of itemKeys">
-            {{item[key]}}
+        <tr *ngFor="let item of lists[currentItem].items" [style.border-bottom-color]="getBackgroundcolor(item)">
+          <td *ngIf="criticalIndex != -1" class="label"><span class="dot" [style.background-color]="getBackgroundcolor(item)"></span></td>
+          <td *ngFor="let label of lists[currentItem].labels">
+            <i *ngIf="item[label.key] == true" class="fa fa-check"></i>
+            <i *ngIf="item[label.key] == false" class="fa fa-times"></i>
+            <span *ngIf="item[label.key] != true && item[label.key] != false">{{item[label.key]}}</span>
           </td>
         </tr>
       </tbody>

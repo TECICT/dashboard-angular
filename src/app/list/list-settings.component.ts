@@ -1,23 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { ListService } from '../services';
+import { ListService, UserService } from '../services';
+import { User } from '../models';
 
 @Component({
   selector: 'list-setting',
   templateUrl: './list-settings.component.html',
   styleUrls: ['./list-settings.component.css'],
 })
-export class ListSettingsComponent implements OnInit{
+export class ListSettingsComponent implements OnInit, AfterViewInit{
   allLists: any;
   newItems = {};
   error = "";
+  user: User = new User();
+  hasPermission: boolean = false;
+  editing: boolean = false;
+
   constructor(
     private listService: ListService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {
     this.getAll();
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      (<any>Object).assign(this.user, this.userService.getCurrentUser());
+      if (this.user.role == 'admin') {
+        this.hasPermission = true;
+      } else {
+        this.hasPermission = false
+      }
+    }, 100);
   }
 
   getAll() {
@@ -32,11 +49,14 @@ export class ListSettingsComponent implements OnInit{
             this.newItems[list.listName][label.key] = false;
           }
         })
+        list.items.forEach(item => {
+          item["editing"] = false;
+        })
       })
     })
   }
 
-  save(listName) {
+  save(listName, id) {
     var i = this.allLists.findIndex((element, index) => {
       if (element.listName == listName){
         return true;
@@ -45,10 +65,9 @@ export class ListSettingsComponent implements OnInit{
     if (!this.validateItem(listName)) {
       this.error = "please fill in all the fields";
     } else {
-      console.log(this.newItems[listName]);
       this.allLists[i].items.push(this.newItems[listName])
       this.newItems[listName] = {};
-      this.listService.putType(this.allLists[i], listName)
+      this.listService.putType(this.allLists[i], id)
       .subscribe(
         data => {
           this.getAll();
@@ -57,8 +76,23 @@ export class ListSettingsComponent implements OnInit{
     }
   }
 
-  deleteList(listName) {
-    this.listService.deleteType(listName)
+  saveExisting(listName, id) {
+    var i = this.allLists.findIndex((element, index) => {
+      if (element.listName == listName){
+        return true;
+      }
+    });
+    this.listService.putType(this.allLists[i], id)
+    .subscribe(
+      data => {
+        this.getAll();
+      }
+    )
+  }
+
+
+  deleteList(id) {
+    this.listService.deleteType(id)
     .subscribe(
       data => {
         console.log("list deleted");
@@ -67,7 +101,7 @@ export class ListSettingsComponent implements OnInit{
     )
   }
 
-  deleteItem(item, listName) {
+  deleteItem(item, listName, id) {
     var i = this.allLists.findIndex((element, index) => {
       if (element.listName == listName){
         return true;
@@ -79,7 +113,7 @@ export class ListSettingsComponent implements OnInit{
       }
     });
     this.allLists[i].items.splice(j, 1);
-    this.listService.putType(this.allLists[i], listName)
+    this.listService.putType(this.allLists[i], id)
     .subscribe(
       data => {
         this.getAll();
@@ -110,7 +144,7 @@ export class ListSettingsComponent implements OnInit{
         listLabel.critical = 'no';
       }
     });
-    this.listService.putType(list, list.listName)
+    this.listService.putType(list, list._id)
     .subscribe(
       data => {
         this.getAll();

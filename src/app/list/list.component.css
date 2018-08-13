@@ -3,18 +3,14 @@ h1 {
     padding-left: 15px;
 }
 
-
 tr {
-  border-left: solid 10px white;
-}
-
-table, th, td {
-  border-top: 1px solid #DDDDDD;
-  border-bottom: 1px solid #DDDDDD;
+  border-top: 2px solid #DDDDDD;
+  border-bottom: 2px solid #DDDDDD;
 }
 
 table {
   width: 98%;
+  margin-left: 10px;
 }
 
 th {
@@ -23,4 +19,13 @@ th {
 
 td {
   height: 40px;
+}
+
+.dot {
+  height: 20px;
+  width: 20px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
 }

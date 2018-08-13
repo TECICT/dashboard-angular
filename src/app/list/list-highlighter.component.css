@@ -1,0 +1,43 @@
+h1 {
+    color: #FFFFFF;
+    padding-left: 15px;
+}
+
+table {
+  width: 100%;
+  color: #FFFFFF;
+  overflow: hidden;
+  /*background-color: #003443;*/
+}
+
+td {
+  font-size: 45px;
+  font-weight: 600;
+}
+
+th {
+  color: #003443;
+  font-style: italic;
+}
+
+/*.row {
+  height: 100%;
+}*/
+
+.list-highlighter {
+  height: 100%;
+  width: 100%;
+  background-color: #F14B00;
+}
+
+.dark {
+  background-color: #003443;
+}
+
+.dark th {
+  color: #F14B00;
+}
+
+.row {
+  width: 100%;
+}

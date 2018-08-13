@@ -17,14 +17,15 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
               opacity: 1
           })),
 
-          transition('faded => clear', animate('500ms 500ms ease-in')),
-          transition('clear => faded', animate('500ms ease-out')),
+          transition('faded => clear', animate('250ms 250ms ease-in')),
+          transition('clear => faded', animate('250ms ease-out')),
       ]),
   ]
 })
 export class ListComponent implements OnInit{
   @Output() listLoaded = new EventEmitter();
-  @Input() include: string[] = ['acute', 'bench', 'jobOffer', 'starter', 'stopper'];
+  @Input() include: string[] = [];
+  @Input() exclude: string[] = [];
   private animationTimer;
   public lists: any = [{'listName': ''}];
   public currentItem = 0;
@@ -32,7 +33,8 @@ export class ListComponent implements OnInit{
   public criticalIndex = -1;
   public criticalType = 'no';
   public state = 'faded';
-  public noData = false;
+  public noData = true;
+  private subscription;
 
   constructor(
     private listService: ListService
@@ -40,10 +42,8 @@ export class ListComponent implements OnInit{
 
   ngOnInit() {
     this.getAll();
-    // this.listTimer = Observable.timer(0, 5000);
-    // this.listTimer.subscribe((t) => this.getAll());
-    this.animationTimer = Observable.timer(5000, 5000);
-    this.animationTimer.subscribe((t) => this.toggleState());
+    this.animationTimer = Observable.timer(15000, 15000);
+    this.subscription = this.animationTimer.subscribe((t) => this.toggleState());
   }
 
   getAll() {
@@ -54,20 +54,65 @@ export class ListComponent implements OnInit{
           this.noData = true;
         } else {
           this.lists = data;
-          console.log(this.lists);
+          if (this.include.length > 0 || this.exclude.length > 0) {
+            this.clearLists();
+          }
+          this.splitLists();
           this.setList();
+          this.noData = false;
         }
         this.listLoaded.emit();
       }
     )
   }
 
+  clearLists() {
+    for (let index = this.lists.length - 1; index >= 0; index--) {
+      if (this.include.length > 0 && !this.include.includes(this.lists[index].listName)) {
+        this.lists.splice(index, 1);
+      }
+      if (this.exclude.includes(this.lists[index].listName)) {
+        this.lists.splice(index, 1);
+      }
+    }
+  }
+
+  splitLists() {
+    let listSplitted = false;
+    for (let index in this.lists) {
+      if (this.lists[index].items.length > 12) {
+        let listCopy = JSON.parse(JSON.stringify(this.lists[index]));
+        listCopy.items.splice(0,12);
+        this.lists[index].items.splice(12);
+        this.lists.splice(index+1, 0, listCopy);
+        listSplitted = true;
+      }
+    }
+    if (listSplitted) {
+      this.splitLists();
+    }
+  }
+
+  checkAnyValid() {
+    let anyValid = false;
+    for(let listItem of this.lists) {
+      if (listItem.items.length != 0) {
+        anyValid = true;
+      }
+    }
+    return anyValid;
+  }
+
   setList() {
     if (this.state == 'faded' && this.lists[0].labels) {
-      this.currentItem = this.checkValidItem(this.currentItem);
-      this.itemKeys = Object.keys(this.lists[this.currentItem].items[0]);
-      this.getCriticalIndex();
-      this.toggleState();
+      if (this.checkAnyValid()) {
+        this.currentItem = this.checkValidItem(this.currentItem);
+        this.itemKeys = Object.keys(this.lists[this.currentItem].items[0]);
+        this.getCriticalIndex();
+        this.toggleState();
+      } else {
+        this.subscription.unsubscribe();
+      }
     }
   }
 
@@ -102,7 +147,7 @@ export class ListComponent implements OnInit{
 
   getBackgroundcolor(item) {
     if (this.criticalIndex == -1) {
-      return "#FFFFFF";
+      return "#DDDDDD";
     } else {
       if (this.lists[this.currentItem].labels[this.criticalIndex].critical == 'yes') {
         if (item[this.itemKeys[this.criticalIndex]]) {

@@ -35,8 +35,8 @@ export class ListService {
            .map(data => data);
   }
 
-  getType(listName): Observable<any[]> {
-    return this.apiService.get('/listtype/' + listName)
+  getType(id): Observable<any[]> {
+    return this.apiService.get('/listtype/' + id)
            .map(data => data);
   }
 
@@ -44,11 +44,11 @@ export class ListService {
     return this.apiService.post('/listtype/', object);
   }
 
-  putType(object, listName) {
-    return this.apiService.put('/listtype/' + listName, object);
+  putType(object, id) {
+    return this.apiService.put('/listtype/' + id, object);
   }
 
-  deleteType(listName) {
-    return this.apiService.delete('/listtype/' + listName)
+  deleteType(id) {
+    return this.apiService.delete('/listtype/' + id)
   }
 }
