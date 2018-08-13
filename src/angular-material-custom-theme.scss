@@ -1,0 +1,7 @@
+@import '~@angular/material/theming';
+// always include only once per project
+@include mat-core();
+$mytheme-primary: mat-palette($mat-green);
+$mytheme-accent : mat-palette($mat-green, A100, A400, A700);
+$mytheme-warn : mat-palette($mat-red);
+$mytheme-theme: mat-light-theme($mytheme-primary, $mytheme-accent, $mytheme-warn);
