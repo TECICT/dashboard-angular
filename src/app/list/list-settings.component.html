@@ -7,7 +7,7 @@
         <div *ngIf="!hasPermission" class="col-md-12">
             <span>It seems like you don't have the right permissions to change the dashboard settings. Please contact your supervisor to get the correct access rights or go back to the <a routerLink="/">home page</a>.</span>
         </div>
-        <div *ngIf="hasPermission">
+        <div *ngIf="hasPermission" class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <button type="button" class="btn tecbtn-reverse" [routerLink]="['/']"><i class="fa fa-home"></i></button>
