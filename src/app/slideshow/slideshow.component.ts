@@ -16,6 +16,7 @@ export class SlideshowComponent implements OnInit{
   src: String = "";
   private slideshowTimer;
   serverOnline: boolean = true;
+  isImage: boolean = false;
 
   constructor(private settingsService: SettingsService) {}
 
@@ -29,10 +30,16 @@ export class SlideshowComponent implements OnInit{
       this.settingsService.get()
       .subscribe(
         settings => {
-          if (!this.serverOnline || this.src !== environment.api_url + '/video/' + settings.video.split('/').pop()) {
-            this.serverOnline = true;
+          if (settings.video.split('.').pop() == 'png' || settings.video.split('.').pop() == 'jpg') {
+            this.isImage = true;
             this.src = environment.api_url + '/video/' + settings.video.split('/').pop();
-            this.loadVideo();
+            this.slideshowLoaded.emit(true);
+          } else {
+            if (!this.serverOnline || this.src !== environment.api_url + '/video/' + settings.video.split('/').pop()) {
+              this.serverOnline = true;
+              this.src = environment.api_url + '/video/' + settings.video.split('/').pop();
+              this.loadVideo();
+            }
           }
         },
         error => {

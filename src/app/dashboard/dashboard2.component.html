@@ -10,7 +10,7 @@
     <slideshow (slideshowLoaded)="finishSlideshow($event)" [@allDone]="slideshowState" (dblclick)="changeroute('settings')"></slideshow>
     <weather (weatherLoaded)="finishWeather($event)" [@allDone]="weatherState"></weather>
     <!-- <news (newsLoaded)="finishNews($event)" [@allDone]="newsState"></news> -->
-    <list exclude="['Vacatures', 'Bank']" *ngIf="refresh" (dblclick)="changeroute('listsettings')" ></list>
+    <list exclude="['Vacatures', 'Bank', 'vacatures', 'bank']" *ngIf="refresh" (dblclick)="changeroute('listsettings')" ></list>
     <!-- <list *ngIf="refresh" (dblclick)="changeroute('listsettings')" ></list> -->
     <maps (mapsLoaded)="finishMaps($event)" [@allDone]="mapsState"></maps>
     <list-highlighter class="highlighter1" listName="bank" (dblclick)="changeroute('listsettings')"></list-highlighter>

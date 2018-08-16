@@ -16,7 +16,7 @@ import { Settings } from '../models';
 export class SlideshowSettingsComponent implements AfterViewInit, OnInit {
     public uploader:FileUploader = new FileUploader({
       url: environment.api_url + '/video/upload',
-      allowedMimeType: ['video/mp4']
+      allowedMimeType: ['video/mp4', 'image/jpeg', 'image/png']
     });
     settings: Settings = new Settings();
     labelVal: String = 'Choose a file';

@@ -1,8 +1,11 @@
-<div class="frame">
+<div class="frame" *ngIf="!isImage">
     <video muted #videoplayer id="videoplayer" preload="none" autoplay loop *ngIf="serverOnline">
         <source [src]="src" type="video/mp4">
         Your browser does not support the video tag.
     </video>
     <img class="backupimg" src="../../assets/Presentatie_DOWN.png" *ngIf="!serverOnline">
+</div>
+<div class="frame" *ngIf="isImage">
+  <img class="slideshow-image" src="{{src}}">
 </div>
 

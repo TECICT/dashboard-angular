@@ -7,7 +7,7 @@
         <form>
             <div class="form-group">
                 <br>
-                <input type="file" id="file" class="form-control inputfile" name="single" accept="video/mp4" ng2FileSelect [uploader]="uploader" (change)="onFileSelected($event)"/>
+                <input type="file" id="file" class="form-control inputfile" name="single" accept="video/mp4,image/*" ng2FileSelect [uploader]="uploader" (change)="onFileSelected($event)"/>
                 <label class="btn" for="file">{{ labelVal }}</label>
             </div>
         </form>
