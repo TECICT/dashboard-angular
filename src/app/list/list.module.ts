@@ -10,7 +10,6 @@ import { ListHighlighterComponent } from './list-highlighter.component';
 import { AddListTypeComponent } from './add-list-type.component';
 import { ListService } from '../services';
 import { MatCheckboxModule, MatInputModule, MatButtonModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 const appRoutes: ModuleWithProviders = RouterModule.forChild([
   {
