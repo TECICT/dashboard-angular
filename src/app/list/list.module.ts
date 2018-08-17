@@ -9,7 +9,8 @@ import { ListSettingsComponent } from './list-settings.component';
 import { ListHighlighterComponent } from './list-highlighter.component';
 import { AddListTypeComponent } from './add-list-type.component';
 import { ListService } from '../services';
-import { MatCheckboxModule, MatInputModule, MatButtonModule, MatSelectModule } from '@angular/material';
+import { MatCheckboxModule, MatInputModule, MatButtonModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 const appRoutes: ModuleWithProviders = RouterModule.forChild([
   {
@@ -42,6 +43,8 @@ const appRoutes: ModuleWithProviders = RouterModule.forChild([
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     ErrorModule
   ],
   exports: [
@@ -51,7 +54,8 @@ const appRoutes: ModuleWithProviders = RouterModule.forChild([
     ListHighlighterComponent,
   ],
   providers: [
-    ListService
+    ListService,
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
   ],
   bootstrap: [
     ListComponent,

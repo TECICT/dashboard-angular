@@ -32,7 +32,7 @@
                     <br>
                     <br>
                     <div class="d-none d-md-block">
-                        <table>
+                        <table class="mat-typography">
                             <thead>
                             <tr>
                                 <th *ngFor="let label of list.labels" (click)="setCritical(list, label)" [style.background-color]="getBackgroundColor(label)">{{label.key}}</th>
@@ -47,8 +47,11 @@
                                                 <i class="fa fa-check" *ngIf="item[label.key]"></i>
                                                 <i class="fa fa-times" *ngIf="!item[label.key]"></i>
                                             </div>
-                                            <div *ngIf="label.type !== 'checkbox'" class="tdbox">
+                                            <div *ngIf="label.type !== 'checkbox' && label.type != 'Date'" class="tdbox">
                                                 {{item[label.key]}}
+                                            </div>
+                                            <div *ngIf="label.type == 'Date'" class="tdbox">
+                                                {{item[label.key] | date: 'dd/MM/yyyy'}}
                                             </div>
                                         </td>
                                     </ng-container>
@@ -59,11 +62,21 @@
                                                 [(ngModel)]="item[label.key]"
                                                 ></mat-checkbox>
                                             </div>
-                                            <div *ngIf="label.type !== 'checkbox'">
+                                            <div *ngIf="label.type != 'checkbox' && label.type != 'Date'">
                                                 <input
                                                 class="existingInput"
                                                 [(ngModel)]="item[label.key]"
-                                                type="{{item[label.type]}}"/>
+                                                type="{{label.type}}"/>
+                                            </div>
+                                            <div *ngIf="label.type == 'Date'">
+                                                <mat-form-field *ngIf="label.type == 'Date'">
+                                                    <input
+                                                    matInput [matDatepicker]="picker"
+                                                    [(ngModel)]="item[label.key]"
+                                                    (focus)="picker.open()">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                    <mat-datepicker touchUi #picker></mat-datepicker>
+                                                </mat-form-field>
                                             </div>
                                         </td>
                                     </ng-container>
@@ -78,7 +91,7 @@
                                 </tr>
                                 <tr>
                                     <td *ngFor="let label of list.labels">
-                                        <mat-form-field *ngIf="label.type != 'checkbox'">
+                                        <mat-form-field *ngIf="label.type != 'checkbox' && label.type != 'Date'">
                                             <input matInput
                                             [(ngModel)]="newItems[list.listName][label.key]"
                                             type="{{label.type}}"/>
@@ -88,6 +101,14 @@
                                         [(ngModel)]="newItems[list.listName][label.key]"
                                         checked=false
                                         ></mat-checkbox>
+                                        <mat-form-field *ngIf="label.type == 'Date'">
+                                            <input
+                                            matInput [matDatepicker]="picker"
+                                            [(ngModel)]="newItems[list.listName][label.key]"
+                                            (focus)="picker.open()">
+                                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                            <mat-datepicker touchUi #picker></mat-datepicker>
+                                        </mat-form-field>
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-success" (click)="save(list.listName, list._id)">Save</button>
