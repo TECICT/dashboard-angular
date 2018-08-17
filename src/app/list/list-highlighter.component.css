@@ -1,12 +1,13 @@
 h1 {
     color: #FFFFFF;
-    padding-left: 15px;
+    padding-left: 10px;
 }
 
 table {
   width: 100%;
   color: #FFFFFF;
   overflow: hidden;
+  padding-left: 10px;
   /*background-color: #003443;*/
 }
 
@@ -40,4 +41,26 @@ th {
 
 .row {
   width: 100%;
+}
+
+@media screen and (max-width: 1050px){
+  h1 {
+    font-size: 40px;
+  }
+
+  td {
+    font-size: 35px;
+    font-weight: normal;
+  }
+}
+
+@media screen and (max-width: 700px){
+  h1 {
+    font-size: 25px;
+  }
+
+  td {
+    font-size: 20px;
+    font-weight: normal;
+  }
 }

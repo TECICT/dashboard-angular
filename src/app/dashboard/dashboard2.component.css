@@ -85,7 +85,7 @@ maps {
 
 @media screen and (max-width: 1050px) {
     .wrapper {
-        grid-template-rows: 56vw 20vw 20vw 56vw 56vw;
+        grid-template-rows: 56vw 20vw 20vw 56vw 56vw 20vw;
         grid-template-columns: 100%;
     }
 
@@ -101,31 +101,45 @@ maps {
         z-index: 3;
     }
 
-    weather {
+    .highlighter1 {
         grid-column: 1;
         /* autoprefixer: off */
         grid-row: 2;
+        z-index: 3;
+    }
+
+    .highlighter2 {
+        grid-column: 1;
+        /* autoprefixer: off */
+        grid-row: 3;
+        z-index: 3;
+    }
+
+    weather {
+        grid-column: 1;
+        /* autoprefixer: off */
+        grid-row: 6;
         z-index: 2;
     }
 
     news {
         grid-column: 1;
         /* autoprefixer: off */
-        grid-row: 3;
+        grid-row: 5;
         z-index: 1;
     }
 
     slideshow {
         grid-column: 1;
         /* autoprefixer: off */
-        grid-row: 5;
+        grid-row: 4;
         z-index: 0;
     }
 
     maps {
         grid-column: 1;
         /* autoprefixer: off */
-        grid-row: 4;
+        grid-row: 5;
         z-index: -1;
     }
 }
@@ -139,7 +153,7 @@ maps {
 
 @media screen and (max-width: 500px) {
     .wrapper {
-        grid-template-rows: 56vw 35vw 35vw 90vw 70vw;
+        grid-template-rows: 56vw 35vw 35vw 90vw 70vw 40vw;
         grid-template-columns: 100%;
     }
 }
@@ -150,7 +164,7 @@ maps {
     }
 
     .wrapper {
-        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 2fr 2fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 2fr 1fr;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     }
 }

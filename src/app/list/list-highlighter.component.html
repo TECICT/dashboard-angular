@@ -1,10 +1,10 @@
 <div class="list-highlighter {{stylePreset}}" *ngIf="!noData">
   <h1 *ngIf="errorMsg">{{errorMsg}}</h1>
   <div *ngIf="!errorMsg" class="row">
-    <div class="col-2">
+    <div class="col-xl-3 col-lg-4 col-md-4">
       <h1>{{list.listName}}</h1>
     </div>
-    <div class="listItem col-10" [@newItem]="state" (@newItem.done)="setList()">
+    <div class="listItem col-9" [@newItem]="state" (@newItem.done)="setList()">
       <table>
         <thead>
           <tr>
