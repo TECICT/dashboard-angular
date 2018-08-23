@@ -34,6 +34,7 @@ export class ListHighlighterComponent implements OnInit{
   public state = 'faded';
   public currentItem = 0;
   private animationTimer;
+  private dataTimer;
   private subscription;
 
 
@@ -45,7 +46,8 @@ export class ListHighlighterComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.getList();
+    this.dataTimer = Observable.timer(0, 30000);
+    this.dataTimer.subscribe((t) => this.getList());
   }
 
   getList() {
