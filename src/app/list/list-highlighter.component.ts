@@ -63,9 +63,6 @@ export class ListHighlighterComponent implements OnInit{
           }
           else {
             this.checkLists();
-            if (this.list.items.length == 1) {
-              this.subscription.unsubscribe();
-            }
             this.setList();
           }
           this.noData = false;
@@ -83,6 +80,8 @@ export class ListHighlighterComponent implements OnInit{
     }
     if (this.list.items.length == 0) {
       this.errorMsg = "The list " + this.listName + " could not be found... Please make sure the list exists.";
+    } else {
+      this.errorMsg = "";
     }
   }
 

@@ -113,8 +113,6 @@ export class ListComponent implements OnInit{
         this.itemKeys = Object.keys(this.lists[this.currentItem].items[0]);
         this.getCriticalIndex();
         this.toggleState();
-      } else {
-        this.subscription.unsubscribe();
       }
     }
   }
