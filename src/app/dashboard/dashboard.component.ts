@@ -92,7 +92,7 @@ export class DashboardComponent {
 
     checkErrors() {
         if (!this.allDone) {
-            window.location.reload();
+            //window.location.reload();
         }
     }
 
