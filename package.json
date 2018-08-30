@@ -53,6 +53,7 @@
     "rxjs-compat": "^6.1.0",
     "tsickle": "^0.27.5",
     "typescript": "^2.7.2",
+    "url-parse": "^1.4.3",
     "xml2js": "^0.4.19",
     "zone.js": "^0.8.14"
   },
