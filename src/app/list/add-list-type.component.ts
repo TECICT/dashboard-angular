@@ -50,10 +50,12 @@ export class AddListTypeComponent implements OnInit{
     this.validateList(() => {
       if (this.error == "") {
         if (this.editting) {
-          this.listService.putType(this.list, this.id)
-          .subscribe(data => {
-            this.listForm.reset();
-            this.router.navigateByUrl('/listsettings');
+          this.restructureItems(() => {
+            this.listService.putType(this.list, this.id)
+            .subscribe(data => {
+              this.listForm.reset();
+              this.router.navigateByUrl('/listsettings');
+            })
           })
         }
         this.listService.postType(this.list)
@@ -69,6 +71,22 @@ export class AddListTypeComponent implements OnInit{
         this.error = "";
       }
     });
+  }
+
+  restructureItems(cb) {
+    this.list.labels.forEach((label) => {
+      if (!this.list.items[0][label.key]) {
+        this.list.items.forEach((listItem) => {
+          switch (label.type) {
+            case "text": listItem[label.key] = ""; break;
+            case "number": listItem[label.key] = ""; break;
+            case "Date": listItem[label.key] = ""; break;
+            case "checkbox": listItem[label.key] = false; break;
+          }
+        })
+      }
+    });
+    cb();
   }
 
   addLabel() {
