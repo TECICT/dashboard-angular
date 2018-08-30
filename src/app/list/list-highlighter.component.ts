@@ -34,6 +34,7 @@ export class ListHighlighterComponent implements OnInit{
   public state = 'faded';
   public currentItem = 0;
   private animationTimer;
+  private dataTimer;
   private subscription;
 
 
@@ -45,7 +46,8 @@ export class ListHighlighterComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.getList();
+    this.dataTimer = Observable.timer(0, 30000);
+    this.dataTimer.subscribe((t) => this.getList());
   }
 
   getList() {
@@ -61,9 +63,6 @@ export class ListHighlighterComponent implements OnInit{
           }
           else {
             this.checkLists();
-            if (this.list.items.length == 1) {
-              this.subscription.unsubscribe();
-            }
             this.setList();
           }
           this.noData = false;
@@ -81,6 +80,8 @@ export class ListHighlighterComponent implements OnInit{
     }
     if (this.list.items.length == 0) {
       this.errorMsg = "The list " + this.listName + " could not be found... Please make sure the list exists.";
+    } else {
+      this.errorMsg = "";
     }
   }
 
