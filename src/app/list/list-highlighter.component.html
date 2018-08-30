@@ -16,7 +16,8 @@
         <tbody>
           <tr>
             <td *ngFor="let label of list.labels">
-              <span>{{list.items[currentItem][label.key]}}</span>
+              <span *ngIf="label.type == 'Date'">{{list.items[currentItem][label.key] | date: 'dd/MM/yyyy'}}</span>
+              <span *ngIf="label.type != 'Date'">{{list.items[currentItem][label.key]}}</span>
             </td>
           </tr>
         </tbody>

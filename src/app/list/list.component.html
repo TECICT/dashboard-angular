@@ -16,7 +16,8 @@
           <td *ngFor="let label of lists[currentItem].labels">
             <i *ngIf="item[label.key] == true" class="fa fa-check"></i>
             <i *ngIf="item[label.key] == false" class="fa fa-times"></i>
-            <span *ngIf="item[label.key] != true && item[label.key] != false">{{item[label.key]}}</span>
+            <span *ngIf="item[label.key] != true && item[label.key] != false && label.type == 'Date'">{{item[label.key] | date: 'dd/MM/yyyy'}}</span>
+            <span *ngIf="item[label.key] != true && item[label.key] != false && label.type != 'Date'">{{item[label.key]}}</span>
           </td>
         </tr>
       </tbody>

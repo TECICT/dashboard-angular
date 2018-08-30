@@ -27,6 +27,7 @@ export class ListComponent implements OnInit{
   @Input() include: string[] = [];
   @Input() exclude: string[] = [];
   private animationTimer;
+  private dataTimer;
   public lists: any = [{'listName': ''}];
   public currentItem = 0;
   public itemKeys = [];
@@ -42,6 +43,8 @@ export class ListComponent implements OnInit{
 
   ngOnInit() {
     this.getAll();
+    this.dataTimer = Observable.timer(0, 30000);
+    this.dataTimer.subscribe((t) => this.getAll());
     this.animationTimer = Observable.timer(15000, 15000);
     this.subscription = this.animationTimer.subscribe((t) => this.toggleState());
   }
@@ -110,8 +113,6 @@ export class ListComponent implements OnInit{
         this.itemKeys = Object.keys(this.lists[this.currentItem].items[0]);
         this.getCriticalIndex();
         this.toggleState();
-      } else {
-        this.subscription.unsubscribe();
       }
     }
   }
