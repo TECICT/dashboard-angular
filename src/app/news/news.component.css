@@ -6,6 +6,7 @@
     grid-template-columns: 15% 85%;
     min-height: 0;
     min-width: 0;
+    background-color: #F14B00;
 }
 
 .title {
@@ -23,13 +24,15 @@
     justify-self: center;
     min-width: 0;
     overflow: hidden;
+    background-color: #F14B00;
 }
 
 h5 {
-    color: #F13B00;
+    /*color: #F13B00;*/
+    color: #FFFFFF;
     padding-right: 25px;
     text-align: justify;
-    font-size: 25px;
+    font-size: 30px;
 }
 /*
 .description {
