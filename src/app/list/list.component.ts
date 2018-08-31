@@ -30,8 +30,7 @@ export class ListComponent implements OnInit{
   private dataTimer;
   public lists: any = [{'listName': ''}];
   public currentItem = 0;
-  public itemKeys = [];
-  public criticalIndex = -1;
+  public criticalLabel = "";
   public criticalType = 'no';
   public state = 'faded';
   public noData = true;
@@ -110,7 +109,6 @@ export class ListComponent implements OnInit{
     if (this.state == 'faded' && this.lists[0].labels) {
       if (this.checkAnyValid()) {
         this.currentItem = this.checkValidItem(this.currentItem);
-        this.itemKeys = Object.keys(this.lists[this.currentItem].items[0]);
         this.getCriticalIndex();
         this.toggleState();
       }
@@ -131,33 +129,34 @@ export class ListComponent implements OnInit{
   }
 
   getCriticalIndex() {
-    this.criticalIndex = -1;
+    this.criticalLabel = "";
     this.criticalType = 'no';
     this.lists[this.currentItem].labels.forEach(
       (label, index) => {
         if (label.critical == 'yes') {
-          this.criticalIndex = index;
+          this.criticalLabel = label.key;
           this.criticalType = 'yes';
         } else if (label.critical == 'reverse') {
-          this.criticalIndex = index;
+          this.criticalLabel = label.key;
           this.criticalType = 'reverse';
         }
       }
     )
+    console.log(this.criticalLabel);
   }
 
   getBackgroundcolor(item) {
-    if (this.criticalIndex == -1) {
+    if (this.criticalLabel == "") {
       return "#DDDDDD";
     } else {
-      if (this.lists[this.currentItem].labels[this.criticalIndex].critical == 'yes') {
-        if (item[this.itemKeys[this.criticalIndex]]) {
+      if (this.criticalType == 'yes') {
+        if (item[this.criticalLabel]) {
           return "#63D668";
         } else {
           return "#F23C32";
         }
-      } else if (this.lists[this.currentItem].labels[this.criticalIndex].critical == 'reverse') {
-        if (item[this.itemKeys[this.criticalIndex]] == false) {
+      } else if (this.criticalType == 'reverse') {
+        if (item[this.criticalLabel] == false) {
           return "#63D668";
         } else {
           return "#F23C32";
