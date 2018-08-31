@@ -86,8 +86,8 @@ export class DashboardComponent {
     }
 
     checkErrors() {
-        if (!this.allDone) {
-            window.location.reload();
-        }
+        // if (!this.allDone) {
+        //     window.location.reload();
+        // }
     }
 }
