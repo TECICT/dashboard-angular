@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api_url: 'http://infogri.tecict.be:3000'
+  api_url: 'http://192.168.10.233/24:3000'
 };
