@@ -44,7 +44,7 @@ export class ListComponent implements OnInit{
     this.getAll();
     this.dataTimer = Observable.timer(0, 30000);
     this.dataTimer.subscribe((t) => this.getAll());
-    this.animationTimer = Observable.timer(15000, 15000);
+    this.animationTimer = Observable.timer(30000, 30000);
     this.subscription = this.animationTimer.subscribe((t) => this.toggleState());
   }
 
